@@ -94,6 +94,3 @@ export const INSTAPAY_INFO = "ashraf.elazab@instapay";
 export const INSTAPAY_QR_CODE =
   "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ashraf.elazab@instapay";
 
-/* باقي الملف (SERVICES, BLOG_POSTS, REVIEWS)
-   سليم 100% ومافيهوش أي أخطاء
-*/

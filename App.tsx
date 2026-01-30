@@ -8,6 +8,7 @@ import About from './pages/About';
 import Booking from './pages/Booking';
 import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
+import SmartAssistant from './pages/SmartAssistant';
 import SocialSidebar from './components/SocialSidebar';
 import AIChatWidget from './components/AIChatWidget';
 import BackgroundMusic from './components/BackgroundMusic';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/ai-assistant" element={<SmartAssistant />} />
             <Route path="/services" element={<Home />} /> 
             <Route path="/blog" element={<Blog />} />     
             <Route path="/testimonials" element={<Testimonials />} />

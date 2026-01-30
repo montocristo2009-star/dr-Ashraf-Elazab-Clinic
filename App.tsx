@@ -8,6 +8,11 @@ import About from './pages/About';
 import Booking from './pages/Booking';
 import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
+import SocialSidebar from './components/SocialSidebar';
+import AIChatWidget from './components/AIChatWidget';
+import BackgroundMusic from './components/BackgroundMusic';
+import MediaLab from './components/MediaLab';
+import LiveVoiceWidget from './components/LiveVoiceWidget';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -34,6 +39,13 @@ const App: React.FC = () => {
             <Route path="/booking" element={<Booking />} />
           </Routes>
         </main>
+
+        {/* أدوات الذكاء الاصطناعي والتواصل */}
+        <SocialSidebar />
+        <AIChatWidget />
+        <BackgroundMusic />
+        <MediaLab />
+        <LiveVoiceWidget />
         
         <Footer />
       </div>

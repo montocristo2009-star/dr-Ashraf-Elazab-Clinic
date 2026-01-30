@@ -4,9 +4,10 @@ import { Service, NavLink, BlogPost, Review } from './types';
 export const NAV_LINKS: NavLink[] = [
   { label: 'الرئيسية', path: '/' },
   { label: 'عن الدكتور', path: '/about' },
+  { label: 'المساعد الذكي', path: '/ai-assistant' },
   { label: 'التخصصات', path: '/services' },
   { label: 'المدونة الطبية', path: '/blog' },
-  { label: 'شهادات المرضى', path: '/atestimonials' },
+  { label: 'شهادات المرضى', path: '/testimonials' },
   { label: 'احجز الآن', path: '/booking' },
 ];
 
@@ -15,10 +16,10 @@ export const DOCTOR_SLOGAN = "التخصص الدقيق يختصر الطريق"
 export const TRUST_MESSAGE = "ثقتكم أغلى ما نسعى إليه";
 
 /** 
- * هام جداً: يرجى تسمية صورتك الشخصية باسم dr-ashraf.jpg 
- * ووضعها في المجلد الرئيسي للمشروع عند الرفع على Cloudflare.
+ * تم تعديل المسار ليكون dr-ashraf.jpg مباشرة 
+ * هذا يضمن للمتصفح العثور عليها في المجلد الرئيسي (Project Root)
  */
-export const DOCTOR_IMAGE_URL = "./dr-ashraf.jpg"; 
+export const DOCTOR_IMAGE_URL = "dr-ashraf.jpg"; 
 
 export const PHONE_CAIRO = "01027470066";
 export const PHONE_SENBELLAWEIN = "01212585052";
@@ -154,5 +155,3 @@ export const REVIEWS: Review[] = [
     date: '2024' 
   }
 ];
-
-

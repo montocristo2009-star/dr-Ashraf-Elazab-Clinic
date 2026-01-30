@@ -16,8 +16,7 @@ export const DOCTOR_SLOGAN = "التخصص الدقيق يختصر الطريق"
 export const TRUST_MESSAGE = "ثقتكم أغلى ما نسعى إليه";
 
 /** 
- * تم استخدام اسم الملف مباشرة. يرجى التأكد من وجود ملف dr-ashraf.jpg 
- * في نفس مجلد index.html (المجلد الرئيسي للمشروع)
+ * المسار المباشر لملف الصورة في الجذر
  */
 export const DOCTOR_IMAGE_URL = "dr-ashraf.jpg"; 
 

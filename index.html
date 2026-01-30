@@ -25,11 +25,13 @@
           extend: {
             colors: {
               medical: {
-                blue: '#0F172A',
-                lightBlue: '#1E293B',
-                green: '#10B981',
-                darkGreen: '#064E3B',
-                accent: '#F1F5F9',
+                // درجات ألوان مستوحاة من صورتك وشعار العيادة
+                blue: '#1e3a5a',      // أزرق احترافي غامق
+                lightBlue: '#2c5282',
+                green: '#4ba472',     // الأخضر الموجود في خلفية صورتك
+                darkGreen: '#2d6a4f',
+                gold: '#d4af37',      // ذهبي خفيف للتنبيهات واللمسات الفنية
+                accent: '#f7fafc',
               }
             },
             fontFamily: {
@@ -42,13 +44,13 @@
     <style>
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #f8fafc; }
-      ::-webkit-scrollbar-thumb { background: #0F172A; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb { background: #1e3a5a; border-radius: 10px; }
       
       body { 
         font-family: 'Cairo', sans-serif; 
         scroll-behavior: smooth; 
         background-color: #FFFFFF;
-        color: #1E293B;
+        color: #2d3748;
       }
       
       .glass-card {
@@ -63,18 +65,33 @@
       }
       .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       
-      .doctor-portrait-frame {
-        box-shadow: 0 40px 80px -15px rgba(15, 23, 42, 0.1);
+      .doctor-image-frame {
+        position: relative;
+        box-shadow: 0 40px 80px -15px rgba(30, 58, 90, 0.2);
         border-radius: 40px;
+        transition: all 0.5s ease;
+      }
+      
+      .doctor-image-frame:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 50px 100px -20px rgba(30, 58, 90, 0.3);
       }
 
       .nav-blur {
         backdrop-filter: blur(20px);
         background: rgba(255, 255, 255, 0.85);
       }
+
+      /* تنسيق خاص للأزرار لتشبه الهوية البصرية للطب الرياضي */
+      .btn-primary {
+        background: linear-gradient(135deg, #1e3a5a 0%, #2c5282 100%);
+        box-shadow: 0 10px 30px -5px rgba(30, 58, 90, 0.4);
+      }
       
-      /* Cloudflare Pages specific optimization */
-      .cloudflare-ready { opacity: 1; transition: opacity 0.5s ease-in; }
+      .btn-success {
+        background: linear-gradient(135deg, #4ba472 0%, #2d6a4f 100%);
+        box-shadow: 0 10px 30px -5px rgba(75, 164, 114, 0.4);
+      }
     </style>
     
     <script type="importmap">
@@ -91,7 +108,7 @@
     }
     </script>
   </head>
-  <body class="overflow-x-hidden antialiased cloudflare-ready">
+  <body class="overflow-x-hidden antialiased">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
   </body>

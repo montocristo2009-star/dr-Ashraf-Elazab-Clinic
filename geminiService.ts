@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, GenerateContentResponse, Modality, Type, VideoGenerationReferenceType } from "@google/genai";
 
 export interface ChatMessage {

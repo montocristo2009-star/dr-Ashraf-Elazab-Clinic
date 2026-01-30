@@ -54,3 +54,4 @@ const SmartAssistant: React.FC = () => {
 };
 
 export default SmartAssistant;
+

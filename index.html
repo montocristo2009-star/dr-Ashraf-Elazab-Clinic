@@ -3,9 +3,15 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>أ.د. أشرف العزب | دكتوراة جراحة العظام والمناظير</title>
-    <meta name="description" content="الموقع الرسمي للأستاذ الدكتور أشرف العزب - دكتوراة جراحة العظام والمناظير - جامعة القاهرة.">
+    <meta name="description" content="الموقع الرسمي للأستاذ الدكتور أشرف العزب - استشاري جراحة العظام والمناظير بمستشفيات جامعة القاهرة. متخصص في إصابات الملاعب والرباط الصليبي والمفاصل الصناعية.">
+    <meta name="keywords" content="أشرف العزب, جراحة عظام, مناظير ركبة, رباط صليبي, مفاصل صناعية, دكتور عظام التجمع, دكتور عظام المنصورة">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="أ.د. أشرف العزب | جراحة العظام والمناظير">
+    <meta property="og:description" content="نُعيد لك حرية الحركة بأحدث تقنيات المناظير والتدخل المحدود.">
+    <meta property="og:type" content="website">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +40,7 @@
       };
     </script>
     <style>
-      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #f8fafc; }
       ::-webkit-scrollbar-thumb { background: #0F172A; border-radius: 10px; }
       
@@ -55,7 +61,7 @@
         from { transform: translateY(20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
       }
-      .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+      .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       
       .doctor-portrait-frame {
         box-shadow: 0 40px 80px -15px rgba(15, 23, 42, 0.1);
@@ -66,6 +72,9 @@
         backdrop-filter: blur(20px);
         background: rgba(255, 255, 255, 0.85);
       }
+      
+      /* Cloudflare Pages specific optimization */
+      .cloudflare-ready { opacity: 1; transition: opacity 0.5s ease-in; }
     </style>
     
     <script type="importmap">
@@ -82,7 +91,7 @@
     }
     </script>
   </head>
-  <body class="overflow-x-hidden antialiased">
+  <body class="overflow-x-hidden antialiased cloudflare-ready">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
   </body>

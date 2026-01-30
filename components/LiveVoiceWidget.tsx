@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI, Modality } from '@google/genai';
+import { GoogleGenAI, Modality, LiveServerMessage } from '@google/genai';
 
 const LiveVoiceWidget: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
@@ -10,6 +10,7 @@ const LiveVoiceWidget: React.FC = () => {
   const nextStartTimeRef = useRef(0);
   const sourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
 
+  // Manually implement decode as per @google/genai examples
   const decode = (base64: string) => {
     const binaryString = atob(base64);
     const bytes = new Uint8Array(binaryString.length);
@@ -17,6 +18,7 @@ const LiveVoiceWidget: React.FC = () => {
     return bytes;
   };
 
+  // Manually implement audio decoding for raw PCM streams as required by @google/genai
   const decodeAudioData = async (data: Uint8Array, ctx: AudioContext, sampleRate: number, numChannels: number) => {
     const dataInt16 = new Int16Array(data.buffer);
     const frameCount = dataInt16.length / numChannels;
@@ -28,6 +30,7 @@ const LiveVoiceWidget: React.FC = () => {
     return buffer;
   };
 
+  // Manually implement encode as per @google/genai examples
   const encode = (bytes: Uint8Array) => {
     let binary = '';
     for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
@@ -55,9 +58,11 @@ const LiveVoiceWidget: React.FC = () => {
         const hasKey = await aistudio.hasSelectedApiKey();
         if (!hasKey) {
           await aistudio.openSelectKey();
+          // Assume success after openSelectKey as per @google/genai guidelines
         }
       }
 
+      // Initialize GoogleGenAI inside the function to use the latest API key
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const inputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
       const outputCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -74,14 +79,17 @@ const LiveVoiceWidget: React.FC = () => {
             const processor = inputCtx.createScriptProcessor(4096, 1, 1);
             processor.onaudioprocess = (e) => {
               const inputData = e.inputBuffer.getChannelData(0);
+              // Solely rely on sessionPromise resolves to send data
               sessionPromise.then(session => session.sendRealtimeInput({ media: createBlob(inputData) }));
             };
             source.connect(processor);
             processor.connect(inputCtx.destination);
           },
-          onmessage: async (msg) => {
+          onmessage: async (msg: LiveServerMessage) => {
+            // Process the model's output audio bytes
             const audioData = msg.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
             if (audioData) {
+              // Gapless playback using nextStartTime cursor
               nextStartTimeRef.current = Math.max(nextStartTimeRef.current, outputCtx.currentTime);
               const buffer = await decodeAudioData(decode(audioData), outputCtx, 24000, 1);
               const source = outputCtx.createBufferSource();
@@ -106,6 +114,7 @@ const LiveVoiceWidget: React.FC = () => {
           },
         },
         config: {
+          // Response modality must be exactly Modality.AUDIO
           responseModalities: [Modality.AUDIO],
           speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Zephyr' } } },
           systemInstruction: 'أنت مساعد د. أشرف العزب الصوتي. رد بإيجاز وبراعة مهنية بالعامية المصرية. ممنوع وصف أدوية.'
@@ -115,6 +124,7 @@ const LiveVoiceWidget: React.FC = () => {
     } catch (err: any) {
       console.error(err);
       setIsConnecting(false);
+      // Reset key selection state and prompt if requested entity not found
       if (err.message?.includes('403') || err.message?.includes('Requested entity was not found')) {
         alert('تحتاج هذه الميزة إلى مفتاح API مع تفعيل حساب دفع (Billing).');
         const aistudio = (window as any).aistudio;

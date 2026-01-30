@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أ.د. أشرف العزب | دكتوراة جراحة العظام والمناظير</title>
+    <meta name="description" content="الموقع الرسمي للأستاذ الدكتور أشرف العزب - دكتوراة جراحة العظام والمناظير - جامعة القاهرة.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              medical: {
+                blue: '#0F172A',
+                lightBlue: '#1E293B',
+                green: '#10B981',
+                darkGreen: '#064E3B',
+                accent: '#F1F5F9',
+              }
+            },
+            fontFamily: {
+              cairo: ['Cairo', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #f8fafc; }
+      ::-webkit-scrollbar-thumb { background: #0F172A; border-radius: 10px; }
+      
+      body { 
+        font-family: 'Cairo', sans-serif; 
+        scroll-behavior: smooth; 
+        background-color: #FFFFFF;
+        color: #1E293B;
+      }
+      
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(241, 245, 249, 1);
+      }
+
+      @keyframes fade-in-up {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+      
+      .doctor-portrait-frame {
+        box-shadow: 0 40px 80px -15px rgba(15, 23, 42, 0.15);
+        border-radius: 40px 120px 40px 40px;
+      }
+
+      .nav-blur {
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.85);
+      }
+    </style>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom": "https://esm.sh/react-dom@^19.2.3",
+        "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+        "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+        "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+      }
+    }
+    </script>
+  </head>
+  <body class="overflow-x-hidden antialiased">
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 
-import { GoogleGenAI, GenerateContentResponse, Modality, Type, VideoGenerationReferenceType } from "@google/genai";
+import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -19,23 +19,31 @@ const SYSTEM_INSTRUCTION = `أنت "مساعد د. أشرف العزب الذك�
 export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false, useMaps = false) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    let model = 'gemini-3-flash-preview';
+    let modelName = 'gemini-3-flash-preview';
     const tools: any[] = [];
     
     if (useSearch) tools.push({ googleSearch: {} });
     if (useMaps) {
-      model = 'gemini-2.5-flash';
+      modelName = 'gemini-2.5-flash';
       tools.push({ googleMaps: {} });
     }
 
-    const contents = history.map(m => ({
-      role: m.role,
-      parts: [{ text: m.text }]
-    }));
+    // Gemini API REQUIRES the conversation to start with a 'user' message.
+    // We skip the initial 'model' greeting if it's the first element.
+    const formattedContents = history
+      .filter((m, index) => !(index === 0 && m.role === 'model'))
+      .map(m => ({
+        role: m.role,
+        parts: [{ text: m.text }]
+      }));
+
+    if (formattedContents.length === 0) {
+      return { text: "أهلاً بك، كيف يمكنني مساعدتك اليوم؟", grounding: [] };
+    }
 
     const response: GenerateContentResponse = await ai.models.generateContent({
-      model: model,
-      contents: contents,
+      model: modelName,
+      contents: formattedContents,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         tools: tools.length > 0 ? tools : undefined,
@@ -43,12 +51,16 @@ export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false
     });
 
     return {
-      text: response.text || "أهلاً بك، كيف يمكنني مساعدتك؟",
+      text: response.text || "عذراً، لم أستطع معالجة الرد بشكل صحيح.",
       grounding: response.candidates?.[0]?.groundingMetadata?.groundingChunks || []
     };
-  } catch (error) {
-    console.error("AI Error:", error);
-    return { text: "نعتذر، هناك ضغط على الخدمة حالياً..", grounding: [] };
+  } catch (error: any) {
+    console.error("Gemini API Error Details:", error);
+    // Return a more descriptive error if needed for debugging
+    return { 
+      text: "أعتذر منك، حدث خطأ تقني في الاتصال بالمساعد الذكي. يرجى المحاولة مرة أخرى أو التواصل مع العيادة هاتفياً.", 
+      grounding: [] 
+    };
   }
 };
 

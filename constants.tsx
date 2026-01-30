@@ -93,4 +93,6 @@ export const WHATSAPP_URL = `https://wa.me/2${PHONE_CAIRO}`;
 export const INSTAPAY_INFO = "ashraf.elazab@instapay";
 export const INSTAPAY_QR_CODE =
   "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ashraf.elazab@instapay";
+export const DOCTOR_IMAGE_URL = "/dr-ashraf.jpg";
+
 

@@ -16,8 +16,8 @@ export const DOCTOR_SLOGAN = "التخصص الدقيق يختصر الطريق"
 export const TRUST_MESSAGE = "ثقتكم أغلى ما نسعى إليه";
 
 /** 
- * تم تعديل المسار ليكون dr-ashraf.jpg مباشرة 
- * هذا يضمن للمتصفح العثور عليها في المجلد الرئيسي (Project Root)
+ * تم استخدام اسم الملف مباشرة. يرجى التأكد من وجود ملف dr-ashraf.jpg 
+ * في نفس مجلد index.html (المجلد الرئيسي للمشروع)
  */
 export const DOCTOR_IMAGE_URL = "dr-ashraf.jpg"; 
 
@@ -155,4 +155,3 @@ export const REVIEWS: Review[] = [
     date: '2024' 
   }
 ];
-

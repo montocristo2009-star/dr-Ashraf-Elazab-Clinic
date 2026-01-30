@@ -14,6 +14,19 @@ import {
 } from '../constants';
 
 const Home: React.FC = () => {
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    // If the actual image fails to load, we show a professional placeholder
+    const target = e.target as HTMLImageElement;
+    target.style.display = 'none';
+    const parent = target.parentElement;
+    if (parent) {
+      parent.classList.add('flex', 'items-center', 'justify-center', 'bg-medical-blue');
+      const icon = document.createElement('div');
+      icon.innerHTML = '<span style="font-size: 10rem">👨‍⚕️</span>';
+      parent.appendChild(icon);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -41,12 +54,13 @@ const Home: React.FC = () => {
           </div>
 
           <div className="relative flex justify-center animate-fade-in-up lg:justify-end">
-            <div className="doctor-image-frame w-full max-w-md aspect-square bg-white p-3 border-4 border-white overflow-hidden rounded-[40px]">
+            <div className="doctor-image-frame w-full max-w-md aspect-square bg-slate-200 p-3 border-4 border-white overflow-hidden rounded-[40px] shadow-2xl relative">
               <img 
                 src={DOCTOR_IMAGE_URL} 
                 alt={DOCTOR_NAME} 
-                className="w-full h-full object-cover rounded-[32px]" 
+                className="w-full h-full object-cover rounded-[32px] block relative z-10" 
                 loading="eager"
+                onError={handleImageError}
               />
             </div>
           </div>
@@ -101,6 +115,7 @@ const Home: React.FC = () => {
                 <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-4xl mb-8 group-hover:bg-medical-blue group-hover:text-white transition-all">
                   {s.icon}
                 </div>
+                <h3 className="text-xl font-black text-medical-blue mb-4">{s.title}</h3>
                 <h3 className="text-xl font-black text-medical-blue mb-4">{s.title}</h3>
                 <p className="text-slate-500 font-medium text-sm leading-relaxed">{s.description}</p>
               </div>

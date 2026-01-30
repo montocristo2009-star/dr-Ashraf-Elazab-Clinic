@@ -44,13 +44,12 @@ const About: React.FC = () => {
           
           <div className="order-1 lg:order-2">
             <div className="relative group">
-              {/* إطار خلفي جمالي */}
-              <div className="absolute inset-0 bg-medical-blue/5 rounded-[80px] rotate-3 transition-transform group-hover:rotate-0"></div>
-              <div className="bg-white p-4 rounded-[80px] shadow-2xl relative z-10 border border-slate-50">
+              <div className="absolute inset-0 bg-medical-blue/5 rounded-[60px] rotate-3 transition-transform group-hover:rotate-0"></div>
+              <div className="bg-white p-4 rounded-[60px] shadow-2xl relative z-10 border border-slate-50">
                 <img 
                   src={DOCTOR_IMAGE_URL} 
                   alt={DOCTOR_NAME} 
-                  className="w-full aspect-[4/5] object-cover rounded-[70px] transition-all duration-1000 shadow-inner"
+                  className="w-full aspect-[4/5] object-cover rounded-[50px] transition-all duration-1000 shadow-inner"
                 />
               </div>
             </div>
@@ -84,7 +83,53 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        {/* بقية السيرة الذاتية كما هي... */}
+        {/* Fellowships detailed and other sections remain the same for stability */}
+        <section className="mb-24 py-20 bg-slate-50 rounded-[80px] px-12">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-black text-medical-blue mb-4">الزمالات الدولية والتدريب المتقدم</h2>
+            <p className="text-slate-500 font-bold">خبرات عالمية مجمعة من أرقى المراكز الطبية في أوروبا وآسيا.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {FELLOWSHIPS_DETAILED.map((f, i) => (
+              <div key={i} className="bg-white p-10 rounded-[50px] shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{f.icon}</div>
+                <h4 className="text-xl font-black text-medical-blue mb-4">{f.title}</h4>
+                <p className="text-slate-500 font-bold leading-relaxed">{f.details}</p>
+                <div className="mt-6 pt-6 border-t border-slate-50 text-xs font-black text-medical-green tracking-widest uppercase">{f.country}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
+           <section className="bg-medical-blue text-white p-12 rounded-[60px] shadow-2xl">
+              <h3 className="text-3xl font-black mb-10 text-medical-green flex items-center gap-4">
+                <span>🔬</span> الأبحاث والنشر الدولي
+              </h3>
+              <ul className="space-y-6">
+                {RESEARCH_INFO.map((info, i) => (
+                  <li key={i} className="flex gap-4 items-start border-b border-white/10 pb-4 last:border-0">
+                    <span className="text-medical-green">●</span>
+                    <p className="font-bold leading-relaxed">{info}</p>
+                  </li>
+                ))}
+              </ul>
+           </section>
+
+           <section className="bg-white p-12 rounded-[60px] shadow-sm border border-slate-100">
+              <h3 className="text-3xl font-black mb-10 text-medical-blue flex items-center gap-4">
+                <span>🌐</span> العضويات الدولية
+              </h3>
+              <div className="grid grid-cols-1 gap-4">
+                {INTERNATIONAL_MEMBERSHIPS.map((m, i) => (
+                  <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                    <span className="font-black text-sm text-medical-blue">{m.title}</span>
+                    <span className="text-[10px] font-black text-medical-green bg-white px-3 py-1 rounded-full shadow-sm">{m.code}</span>
+                  </div>
+                ))}
+              </div>
+           </section>
+        </div>
       </div>
     </div>
   );

@@ -95,4 +95,34 @@ export const INSTAPAY_QR_CODE =
   "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ashraf.elazab@instapay";
 export const DOCTOR_IMAGE_URL = "/dr-ashraf.jpg";
 
+export const SURGICAL_SERVICES = [
+  {
+    title: "جراحات الركبة",
+    description: "جراحات متقدمة لاستبدال المفاصل وإصلاح الأربطة",
+    icon: "🦵"
+  },
+  {
+    title: "جراحات الكتف",
+    description: "مناظير الكتف وإصلاح أوتار الكتف",
+    icon: "💪"
+  },
+  {
+    title: "جراحات العمود الفقري",
+    description: "تشخيص وعلاج آلام العمود الفقري والانزلاق الغضروفي",
+    icon: "🦴"
+  }
+];
+
+export const NON_SURGICAL_SERVICES = [
+  {
+    title: "الحقن الموضعي",
+    description: "حقن البلازما والكورتيزون داخل المفاصل",
+    icon: "💉"
+  },
+  {
+    title: "العلاج التحفظي",
+    description: "برامج علاج بدون جراحة",
+    icon: "🩺"
+  }
+];
 

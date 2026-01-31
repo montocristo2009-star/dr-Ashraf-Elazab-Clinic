@@ -1,31 +1,18 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   SURGICAL_SERVICES, 
-  NON_SURGICAL_SERVICES,
   DOCTOR_NAME, 
   DOCTOR_SLOGAN,
   TRUST_MESSAGE,
   DOCTOR_IMAGE_URL,
-  REVIEWS,
   ACADEMIC_STATS,
   PHONE_CAIRO
 } from '../constants';
 
 const Home: React.FC = () => {
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    // If the actual image fails to load, we show a professional placeholder
-    const target = e.target as HTMLImageElement;
-    target.style.display = 'none';
-    const parent = target.parentElement;
-    if (parent) {
-      parent.classList.add('flex', 'items-center', 'justify-center', 'bg-medical-blue');
-      const icon = document.createElement('div');
-      icon.innerHTML = '<span style="font-size: 10rem">👨‍⚕️</span>';
-      parent.appendChild(icon);
-    }
-  };
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -36,7 +23,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center text-right z-10">
           <div className="animate-fade-in-up">
             <div className="inline-block px-4 py-1 rounded-full bg-medical-green/10 text-medical-green font-black text-xs uppercase tracking-widest mb-6">
-              نخبة جراحة العظام في مصر
+              استشاري جراحة العظام والمناظير
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-medical-blue mb-6 leading-[1.15]">
               نُعيد لك <br/><span className="text-medical-green">حُرية الحركة</span> <br/>بدقة عالمية
@@ -54,49 +41,35 @@ const Home: React.FC = () => {
           </div>
 
           <div className="relative flex justify-center animate-fade-in-up lg:justify-end">
-            <div className="doctor-image-frame w-full max-w-md aspect-square bg-slate-200 p-3 border-4 border-white overflow-hidden rounded-[40px] shadow-2xl relative">
-              <img 
-                src={DOCTOR_IMAGE_URL} 
-                alt={DOCTOR_NAME} 
-                className="w-full h-full object-cover rounded-[32px] block relative z-10" 
-                loading="eager"
-                onError={handleImageError}
-              />
+            <div className="doctor-image-frame w-full max-w-md aspect-square bg-slate-200 p-2 border-4 border-white overflow-hidden rounded-[40px] shadow-2xl relative flex items-center justify-center">
+              {!imgError ? (
+                <img 
+                  src={DOCTOR_IMAGE_URL} 
+                  alt={DOCTOR_NAME} 
+                  className="w-full h-full object-cover rounded-[32px] block relative z-10" 
+                  loading="eager"
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center bg-medical-blue w-full h-full rounded-[32px]">
+                   <span className="text-9xl">👨‍⚕️</span>
+                   <p className="text-white/50 text-xs font-bold mt-4">Professional Profile</p>
+                </div>
+              )}
+              {/* Decorative elements */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-medical-green rounded-3xl -z-10 rotate-12"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Smart Clinic Promotion */}
-      <section className="py-24 bg-white overflow-hidden">
+      {/* Stats Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-slate-50 rounded-[60px] p-12 md:p-20 relative border border-slate-100 flex flex-col lg:flex-row items-center gap-16">
-             <div className="lg:w-1/2 text-right">
-                <span className="text-medical-green font-black text-xs uppercase tracking-[0.4em] mb-4 block">Smart Medical Care</span>
-                <h2 className="text-4xl md:text-5xl font-black text-medical-blue mb-8 leading-tight">استخدم تقنياتنا <br/>الذكية قبل زيارتك</h2>
-                <p className="text-lg text-slate-500 font-bold mb-10 leading-relaxed">
-                  وفرنا لك نظاماً متكاملاً من الذكاء الاصطناعي ليرافقك في رحلة علاجك. تحدث مع مساعدنا الصوتي، أو استفسر كتابياً عن أي معلومة طبية، أو شاهد فيديوهات توضيحية لحالتك.
-                </p>
-                <Link to="/ai-assistant" className="inline-block bg-medical-blue text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-medical-green transition-all shadow-2xl">
-                   دخول العيادة الذكية 🤖
-                </Link>
-             </div>
-             <div className="lg:w-1/2 relative flex justify-center">
-                <div className="w-64 h-64 bg-medical-green rounded-full flex items-center justify-center text-8xl shadow-2xl animate-pulse">🤖</div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-medical-blue rounded-3xl -translate-y-1/2 translate-x-1/2 flex items-center justify-center text-4xl shadow-xl">🎙️</div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-3xl translate-y-1/2 -translate-x-1/2 flex items-center justify-center text-4xl shadow-xl border border-slate-100">🔬</div>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Academic Stats */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {ACADEMIC_STATS.map((stat, i) => (
-              <div key={i} className="p-8 rounded-3xl bg-white border border-slate-100 group hover:bg-medical-blue transition-all duration-500">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{stat.icon}</div>
+              <div key={i} className="p-10 rounded-[40px] bg-slate-50 border border-slate-100 text-center hover:bg-medical-blue group transition-all duration-500">
+                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">{stat.icon}</div>
                 <div className="text-4xl font-black text-medical-blue mb-2 group-hover:text-white">{stat.value}</div>
                 <div className="text-sm font-black text-slate-400 group-hover:text-medical-green uppercase tracking-widest">{stat.label}</div>
               </div>
@@ -105,35 +78,37 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Services and CTA below */}
-      <section id="surgical-services" className="py-24 bg-white">
+      {/* Surgical Services */}
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-black text-medical-blue mb-4">العمليات الجراحية والمناظير</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-right mt-16">
+          <span className="text-medical-green font-black text-xs uppercase tracking-[0.3em] mb-4 block">Our Specialties</span>
+          <h2 className="text-4xl md:text-5xl font-black text-medical-blue mb-16">الجراحات والمناظير المتطورة</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-right">
             {SURGICAL_SERVICES.map(s => (
-              <div key={s.id} className="bg-slate-50 p-10 rounded-[40px] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group">
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-4xl mb-8 group-hover:bg-medical-blue group-hover:text-white transition-all">
+              <div key={s.id} className="bg-white p-12 rounded-[50px] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group">
+                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-4xl mb-8 group-hover:bg-medical-green group-hover:text-white transition-all">
                   {s.icon}
                 </div>
-                <h3 className="text-xl font-black text-medical-blue mb-4">{s.title}</h3>
-                <h3 className="text-xl font-black text-medical-blue mb-4">{s.title}</h3>
-                <p className="text-slate-500 font-medium text-sm leading-relaxed">{s.description}</p>
+                <h3 className="text-2xl font-black text-medical-blue mb-4 leading-tight">{s.title}</h3>
+                <p className="text-slate-500 font-bold text-sm leading-relaxed">{s.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-medical-blue text-white text-center relative overflow-hidden">
+      {/* CTA Section */}
+      <section className="py-32 bg-medical-blue text-white text-center relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-medical-green/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-black mb-8 leading-tight">ابدأ رحلة التعافي اليوم</h2>
-          <p className="text-xl text-slate-400 mb-12 font-medium">"{TRUST_MESSAGE}"</p>
-          <div className="flex flex-col md:flex-row justify-center gap-6">
-            <Link to="/booking" className="btn-success text-white px-16 py-6 rounded-2xl font-black text-2xl shadow-2xl hover:scale-105 transition-all">
-              احجز موعد كشف
+          <h2 className="text-4xl md:text-6xl font-black mb-10 leading-tight">ابدأ رحلة التعافي اليوم <br/>بأمان تام</h2>
+          <p className="text-2xl text-slate-400 mb-16 font-bold">"{TRUST_MESSAGE}"</p>
+          <div className="flex flex-col md:flex-row justify-center gap-8">
+            <Link to="/booking" className="btn-success text-white px-20 py-8 rounded-3xl font-black text-2xl shadow-2xl hover:scale-105 transition-all">
+              احجز موعدك الآن
             </Link>
-            <a href={`tel:${PHONE_CAIRO}`} className="bg-white/10 backdrop-blur-md text-white border-2 border-white/20 px-16 py-6 rounded-2xl font-black text-2xl hover:bg-white/20 transition-all">
-              تحدث إلينا مباشرة
+            <a href={`tel:${PHONE_CAIRO}`} className="bg-white/10 backdrop-blur-md text-white border-2 border-white/20 px-20 py-8 rounded-3xl font-black text-2xl hover:bg-white/20 transition-all">
+              اتصل بنا هاتفياً
             </a>
           </div>
         </div>

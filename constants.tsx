@@ -4,7 +4,7 @@ import { Service, NavLink, BlogPost, Review } from './types';
 export const NAV_LINKS: NavLink[] = [
   { label: 'الرئيسية', path: '/' },
   { label: 'عن الدكتور', path: '/about' },
-  { label: 'المساعد الذكي', path: '/ai-assistant' },
+  { label: 'المساعد الذكي', path: '/AIChatWidget.tsx' },
   { label: 'التخصصات', path: '/services' },
   { label: 'المدونة الطبية', path: '/blog' },
   { label: 'شهادات المرضى', path: '/testimonials' },

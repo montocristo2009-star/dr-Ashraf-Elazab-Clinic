@@ -29,7 +29,7 @@ const About: React.FC = () => {
               "{TRUST_MESSAGE}"
             </p>
             <p className="text-xl text-slate-600 font-bold mb-12 leading-relaxed max-w-xl">
-              استشاري جراحة العظام والمناظير. مسيرة أكاديمية دولية تمتد من جامعة القاهرة وصولاً إلى البورد الأوروبي وزمالات كبرى المراكز العالمية في ألمانيا وسويسرا وكوريا.
+              استشاري جراحة العظام والمناظير بمستشفيات جامعة القاهرة. خبير دولي في جراحات استبدال المفاصل وتدريس الأطراف الصناعية المتقدمة.
             </p>
             
             <div className="grid grid-cols-3 gap-6">
@@ -92,18 +92,53 @@ const About: React.FC = () => {
           </div>
         </section>
 
+        {/* Expertise Grid */}
+        <section className="mb-32 grid grid-cols-1 md:grid-cols-2 gap-12">
+           <div className="bg-slate-50 p-16 rounded-[70px] border border-slate-100">
+              <h3 className="text-3xl font-black mb-10 text-medical-blue">التخصصات الجراحية الدقيقة</h3>
+              <ul className="space-y-6">
+                 {[
+                   "جراحات استبدال مفصل الركبة والحوض والكتف.",
+                   "علاج الكسور المعقدة وإصابات الحوادث.",
+                   "جراحات تقويم العظام وتصحيح التشوهات.",
+                   "مناظير المفاصل والرباط الصليبي."
+                 ].map((item, i) => (
+                   <li key={i} className="flex items-center gap-4 text-slate-600 font-bold">
+                      <span className="w-3 h-3 bg-medical-green rounded-full"></span>
+                      {item}
+                   </li>
+                 ))}
+              </ul>
+           </div>
+           <div className="bg-medical-blue text-white p-16 rounded-[70px] shadow-2xl">
+              <h3 className="text-3xl font-black mb-10 text-medical-green">علاج الألم التداخلي</h3>
+              <ul className="space-y-6">
+                 {[
+                   "حقن البلازما (PRP) للمفاصل والأوتار والكتف.",
+                   "التردد الحراري (Radiofrequency ablation) لعلاج الألم.",
+                   "الحقن الجيلاتيني (Hyaluronic acid) لخشونة المفاصل.",
+                   "حقن الكورتيزون الموضعي تحت الموجات الصوتية."
+                 ].map((item, i) => (
+                   <li key={i} className="flex items-center gap-4 font-bold">
+                      <span className="w-3 h-3 bg-medical-green rounded-full"></span>
+                      {item}
+                   </li>
+                 ))}
+              </ul>
+           </div>
+        </section>
+
         {/* Research & Memberships */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
-           <section className="bg-medical-blue text-white p-16 rounded-[70px] shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-32 h-32 bg-medical-green/10 rounded-full blur-2xl"></div>
-              <h3 className="text-3xl font-black mb-10 text-medical-green flex items-center gap-6">
-                <span>🔬</span> الأبحاث والنشر الدولي
+           <section className="bg-white border-4 border-slate-50 p-16 rounded-[70px] shadow-xl relative overflow-hidden">
+              <h3 className="text-3xl font-black mb-10 text-medical-blue flex items-center gap-6">
+                <span>🔬</span> الخبرة الأكاديمية والبحثية
               </h3>
               <ul className="space-y-8">
                 {RESEARCH_INFO.map((info, i) => (
-                  <li key={i} className="flex gap-6 items-start border-b border-white/5 pb-6 last:border-0">
+                  <li key={i} className="flex gap-6 items-start border-b border-slate-100 pb-6 last:border-0">
                     <span className="text-medical-green text-2xl">●</span>
-                    <p className="font-bold text-lg leading-relaxed">{info}</p>
+                    <p className="font-bold text-lg leading-relaxed text-slate-600">{info}</p>
                   </li>
                 ))}
               </ul>

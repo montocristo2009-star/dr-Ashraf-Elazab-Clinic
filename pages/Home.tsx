@@ -44,7 +44,7 @@ const Home: React.FC = () => {
             <div className="doctor-image-frame w-full max-w-md aspect-square bg-slate-200 p-2 border-4 border-white overflow-hidden rounded-[40px] shadow-2xl relative flex items-center justify-center">
               {!imgError ? (
                 <img 
-                  src={DOCTOR_IMAGE_URL} 
+                  src={https://github.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/blob/5c7a4e111520e41218a05f93068b04e554bc89db/dr-ashraf.jpg.PNG} 
                   alt={DOCTOR_NAME} 
                   className="w-full h-full object-cover rounded-[32px] block relative z-10" 
                   loading="eager"

@@ -6,30 +6,50 @@ export interface ChatMessage {
   text: string;
 }
 
+// تعليمات برمجية مكثفة تشمل كافة المواضيع والآراء لضمان دقة الرد
 const SYSTEM_INSTRUCTION = `أنت "مساعد د. أشرف العزب الذكي". الدكتور أشرف استشاري جراحة العظام والمناظير وحاصل على الدكتوراة من جامعة القاهرة والزمالة الأوروبية (EBOT).
-    معلومات عن خدمات العيادة:
-    1. متخصص في جراحات الركبة والمناظير والرباط الصليبي وإصلاح الغضروف الهلالي.
-    2. يستخدم تقنيات التدخل المحدود الحديثة لإصلاح وتر أكيلس بفتحة 2 سم.
-    3. يعالج خلع الكتف المتكرر (Bankart & Latarjet) وتوصيل أوتار الكتف بالمنظار.
-    4. يعالج الخشونة بالحقن الجيلاتيني والتردد الحراري وحقن البلازما (PRP).
-    5. خبير في علاج حالات عدم التئام الكسور والكسور المعقدة والمفاصل الصناعية.
-    الخلفية العلمية: دكتوراة جامعة القاهرة، ألمانيا، جنيف، كوريا، والبورد الأوروبي.
-    تعليمات الرد: تحدث بلغة مهنية محترمة (عامية مصرية مهذبة). لا تستخدم كلمة "سبيد بريدج" إطلاقاً. ممنوع كتابة أي أدوية. أكد دائماً على أهمية الكشف السريري.`;
+
+معلومات حيوية عن العيادة يجب أن تعرفها وتجيب بناءً عليها:
+المقالات الطبية الـ 10 المتاحة في موقعنا:
+1. إعادة بناء الرباط الصليبي (الدقة التشريحية).
+2. إصلاح الغضروف الهلالي (خياطة الغضروف).
+3. خلع الكتف المتكرر (عملية لاتارجيه).
+4. قطع أوتار الكتف (المناظير الحديثة).
+5. الطب التجديدي (حقن البلازما PRP).
+6. إصلاح وتر أكيلس (التدخل المحدود 2 سم).
+7. المفاصل الصناعية (استبدال مفصل الركبة).
+8. التعافي بعد جراحة المناظير (التأهيل).
+9. إصابات الرباط الجانبي (العلاج التحفظي).
+10. خلع الصابونة المتكرر (إعادة بناء MPFL).
+
+آراء المرضى (10 شهادات نجاح):
+- كابتن أحمد علي (رباط صليبي - عودة للملاعب في 6 شهور).
+- أ/ منى محمود (تغيير مفصل - مشي من ثاني يوم).
+- أ/ إبراهيم حسن (خلع كتف متكرر - ثبات كامل).
+- أ/ سارة يوسف (حقن بلازما PRP - نتائج ممتازة).
+- الحاج محمد القاضي، أ/ رامي كمال، أ/ نادية السيد، م/ عادل سليمان، أ/ سامح فريد، أ/ ليلى عبدالرحمن.
+
+تعليمات الرد:
+- تحدث بلهجة مصرية مهذبة واحترافية.
+- لا تصف أدوية إطلاقاً.
+- أكد دائماً على أهمية الكشف السريري.
+- إذا سألك المريض عن رأي الناس، اذكر له بعض قصص النجاح المذكورة أعلاه.
+- إذا سألك عن الفروع: (القاهرة: التجمع الخامس، المنصورة: ميدان المحطة، السنبلاوين: أرض المحلج).`;
 
 export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false, useMaps = false) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    let modelName = 'gemini-3-flash-preview';
+    // استخدام نموذج Pro للمهام الطبية لضمان أعلى دقة في الإجابة
+    let modelName = 'gemini-3-pro-preview'; 
     const tools: any[] = [];
     
     if (useSearch) tools.push({ googleSearch: {} });
     if (useMaps) {
-      modelName = 'gemini-2.5-flash';
+      modelName = 'gemini-2.5-flash'; // الخرائط مدعومة في فئة 2.5
       tools.push({ googleMaps: {} });
     }
 
-    // Gemini API REQUIRES the conversation to start with a 'user' message.
-    // We skip the initial 'model' greeting if it's the first element.
+    // تنسيق التاريخ لضمان البدء برسالة 'user' كما يتطلب Gemini
     const formattedContents = history
       .filter((m, index) => !(index === 0 && m.role === 'model'))
       .map(m => ({
@@ -38,7 +58,7 @@ export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false
       }));
 
     if (formattedContents.length === 0) {
-      return { text: "أهلاً بك، كيف يمكنني مساعدتك اليوم؟", grounding: [] };
+      return { text: "أهلاً بك في عيادة د. أشرف العزب، كيف يمكنني مساعدتك طبياً اليوم؟", grounding: [] };
     }
 
     const response: GenerateContentResponse = await ai.models.generateContent({
@@ -47,46 +67,54 @@ export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         tools: tools.length > 0 ? tools : undefined,
+        temperature: 0.7, // توازن بين الإبداع والدقة الطبية
       }
     });
 
+    const text = response.text;
+    if (!text) throw new Error("Empty response from AI");
+
     return {
-      text: response.text || "عذراً، لم أستطع معالجة الرد بشكل صحيح.",
+      text: text,
       grounding: response.candidates?.[0]?.groundingMetadata?.groundingChunks || []
     };
   } catch (error: any) {
-    console.error("Gemini API Error Details:", error);
-    // Return a more descriptive error if needed for debugging
+    console.error("Gemini Critical Error:", error);
     return { 
-      text: "أعتذر منك، حدث خطأ تقني في الاتصال بالمساعد الذكي. يرجى المحاولة مرة أخرى أو التواصل مع العيادة هاتفياً.", 
+      text: "عذراً، واجهت مشكلة في معالجة طلبك حالياً. يمكنك تكرار السؤال أو الاتصال بالعيادة مباشرة عبر الأرقام الموضحة في الموقع للحصول على إجابة فورية من الفريق الطبي.", 
       grounding: [] 
     };
   }
 };
 
 export const editMedicalImage = async (base64Data: string, prompt: string) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash-image',
-    contents: {
-      parts: [
-        { inlineData: { data: base64Data, mimeType: 'image/png' } },
-        { text: `As a professional medical assistant, modify this medical image based on: ${prompt}. Focus on clarity and professional medical aesthetics.` }
-      ]
-    }
-  });
+  try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash-image',
+      contents: {
+        parts: [
+          { inlineData: { data: base64Data, mimeType: 'image/png' } },
+          { text: `As a professional medical imaging assistant, modify this clinical image based on: ${prompt}. Maintain anatomical accuracy.` }
+        ]
+      }
+    });
 
-  for (const part of response.candidates[0].content.parts) {
-    if (part.inlineData) return `data:image/png;base64,${part.inlineData.data}`;
+    for (const part of response.candidates[0].content.parts) {
+      if (part.inlineData) return `data:image/png;base64,${part.inlineData.data}`;
+    }
+    return null;
+  } catch (err) {
+    console.error("Image Edit Error:", err);
+    return null;
   }
-  return null;
 };
 
 export const generateMedicalVideo = async (base64Image: string, prompt: string, aspectRatio: '16:9' | '9:16') => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   let operation = await ai.models.generateVideos({
     model: 'veo-3.1-fast-generate-preview',
-    prompt: `Animate this medical illustration showing: ${prompt}. Professional, high-quality medical visualization.`,
+    prompt: `Medical visualization: ${prompt}. Ensure professional healthcare aesthetics.`,
     image: {
       imageBytes: base64Image,
       mimeType: 'image/png',

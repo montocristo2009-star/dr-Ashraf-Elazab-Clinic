@@ -65,10 +65,32 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        {/* Credentials */}
+        {/* Fellowships Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-medical-blue mb-4">المؤهلات العلمية والأكاديمية</h2>
+            <h2 className="text-4xl font-black text-medical-blue mb-4">الزمالات والخبرات الدولية</h2>
+            <p className="text-slate-500 font-bold">تخصص دقيق في المفاصل الصناعية وترميم الكسور من أرقى جامعات العالم</p>
+            <div className="w-20 h-1.5 bg-medical-green mx-auto rounded-full mt-4"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {FELLOWSHIPS_DETAILED.map((f, i) => (
+              <div key={i} className="bg-white p-8 rounded-[45px] border border-slate-100 shadow-sm hover:shadow-xl transition-all group flex flex-col items-center text-center">
+                <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform shadow-inner">
+                  {f.icon}
+                </div>
+                <h4 className="text-xl font-black text-medical-blue mb-2 leading-tight">{f.title}</h4>
+                <p className="text-xs font-black text-medical-green uppercase tracking-widest mb-4">{f.subtitle}</p>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Academic Credentials */}
+        <section className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-medical-blue mb-4">الاعتمادات الأكاديمية</h2>
             <div className="w-20 h-1.5 bg-medical-green mx-auto rounded-full"></div>
           </div>
           
@@ -92,44 +114,29 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        {/* Expertise Grid */}
-        <section className="mb-32 grid grid-cols-1 md:grid-cols-2 gap-12">
-           <div className="bg-slate-50 p-16 rounded-[70px] border border-slate-100">
-              <h3 className="text-3xl font-black mb-10 text-medical-blue">التخصصات الجراحية الدقيقة</h3>
-              <ul className="space-y-6">
-                 {[
-                   "جراحات استبدال مفصل الركبة والحوض والكتف.",
-                   "علاج الكسور المعقدة وإصابات الحوادث.",
-                   "جراحات تقويم العظام وتصحيح التشوهات.",
-                   "مناظير المفاصل والرباط الصليبي."
-                 ].map((item, i) => (
-                   <li key={i} className="flex items-center gap-4 text-slate-600 font-bold">
-                      <span className="w-3 h-3 bg-medical-green rounded-full"></span>
-                      {item}
-                   </li>
-                 ))}
-              </ul>
-           </div>
-           <div className="bg-medical-blue text-white p-16 rounded-[70px] shadow-2xl">
-              <h3 className="text-3xl font-black mb-10 text-medical-green">علاج الألم التداخلي</h3>
-              <ul className="space-y-6">
-                 {[
-                   "حقن البلازما (PRP) للمفاصل والأوتار والكتف.",
-                   "التردد الحراري (Radiofrequency ablation) لعلاج الألم.",
-                   "الحقن الجيلاتيني (Hyaluronic acid) لخشونة المفاصل.",
-                   "حقن الكورتيزون الموضعي تحت الموجات الصوتية."
-                 ].map((item, i) => (
-                   <li key={i} className="flex items-center gap-4 font-bold">
-                      <span className="w-3 h-3 bg-medical-green rounded-full"></span>
-                      {item}
-                   </li>
-                 ))}
-              </ul>
-           </div>
+        {/* Memberships Grid */}
+        <section className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-medical-blue mb-4">العضويات المهنية الدولية والمحلية</h2>
+            <div className="w-20 h-1.5 bg-medical-green mx-auto rounded-full"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {INTERNATIONAL_MEMBERSHIPS.map((m, i) => (
+              <div key={i} className="flex items-center justify-between p-8 bg-slate-50 rounded-[35px] border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+                <div className="flex items-center gap-4">
+                  <span className="text-2xl group-hover:scale-125 transition-transform">{m.icon}</span>
+                  <div className="text-right">
+                    <h5 className="font-black text-medical-blue text-sm">{m.title}</h5>
+                    <span className="text-[10px] font-black text-medical-green uppercase tracking-widest">{m.code}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* Research & Memberships */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
+        {/* Research Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 mb-24">
            <section className="bg-white border-4 border-slate-50 p-16 rounded-[70px] shadow-xl relative overflow-hidden">
               <h3 className="text-3xl font-black mb-10 text-medical-blue flex items-center gap-6">
                 <span>🔬</span> الخبرة الأكاديمية والبحثية
@@ -143,20 +150,6 @@ const About: React.FC = () => {
                 ))}
               </ul>
            </section>
-
-           <section className="bg-slate-50 p-16 rounded-[70px] border border-slate-100">
-              <h3 className="text-3xl font-black mb-10 text-medical-blue flex items-center gap-6">
-                <span>🌐</span> العضويات الدولية
-              </h3>
-              <div className="grid grid-cols-1 gap-6">
-                {INTERNATIONAL_MEMBERSHIPS.map((m, i) => (
-                  <div key={i} className="flex items-center justify-between p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                    <span className="font-black text-lg text-medical-blue">{m.title}</span>
-                    <span className="text-xs font-black text-medical-green bg-green-50 px-4 py-1.5 rounded-full">{m.code}</span>
-                  </div>
-                ))}
-              </div>
-           </section>
         </div>
       </div>
     </div>
@@ -164,3 +157,4 @@ const About: React.FC = () => {
 };
 
 export default About;
+

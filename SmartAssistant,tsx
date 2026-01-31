@@ -1,57 +1,0 @@
-
-import React from 'react';
-import AIChatWidget from '../components/AIChatWidget';
-import LiveVoiceWidget from '../components/LiveVoiceWidget';
-import { DOCTOR_NAME } from '../constants';
-
-const SmartAssistant: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-20 font-cairo" dir="rtl">
-      <div className="max-w-5xl mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="text-center mb-16 animate-fade-in-up">
-          <div className="inline-block px-6 py-2 bg-medical-green/10 text-medical-green rounded-full font-black text-sm uppercase tracking-widest mb-6">
-            تقنية الجيل الثالث من الذكاء الاصطناعي
-          </div>
-          <h1 className="text-5xl md:text-6xl font-black text-medical-blue mb-6">المساعد الطبي الذكي</h1>
-          <p className="text-xl text-slate-500 font-bold max-w-2xl mx-auto leading-relaxed">
-            استشر مساعد {DOCTOR_NAME} الذكي حول الأعراض، مواقع العيادات، أو أحدث تقنيات جراحة العظام. متوفر صوتياً وكتابياً على مدار الساعة.
-          </p>
-        </div>
-
-        {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white p-10 rounded-[50px] shadow-xl border border-slate-100 group hover:border-medical-green transition-all">
-            <div className="w-16 h-16 bg-medical-green text-white rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:rotate-12 transition-transform">🎙️</div>
-            <h3 className="text-2xl font-black text-medical-blue mb-4">المحادثة الصوتية الفورية</h3>
-            <p className="text-slate-500 font-bold leading-relaxed mb-8">تحدث مباشرة مع المساعد بالصوت للحصول على إجابات سريعة وودودة بالعامية المصرية.</p>
-            <div className="text-medical-green font-black text-sm">استخدم زر الميكروفون أسفل يسار الشاشة ←</div>
-          </div>
-          
-          <div className="bg-medical-blue p-10 rounded-[50px] shadow-xl border border-white/10 group hover:-translate-y-2 transition-all">
-            <div className="w-16 h-16 bg-white/10 text-white rounded-3xl flex items-center justify-center text-4xl mb-8">💬</div>
-            <h3 className="text-2xl font-black text-white mb-4">الاستشارة الكتابية الدقيقة</h3>
-            <p className="text-slate-400 font-bold leading-relaxed mb-8">اطرح أسئلتك المفصلة واحصل على روابط مصادر موثقة وبحث فوري في أحدث المجلات الطبية.</p>
-            <div className="text-medical-green font-black text-sm">استخدم نافذة الدردشة أسفل يمين الشاشة ←</div>
-          </div>
-        </div>
-
-        {/* Info Box */}
-        <div className="bg-amber-50 border-2 border-amber-100 p-8 rounded-[40px] flex items-start gap-6">
-           <span className="text-4xl">⚠️</span>
-           <div>
-              <h4 className="font-black text-amber-900 text-lg mb-2">تنبيه هام للمرضى</h4>
-              <p className="text-amber-800/80 font-bold leading-relaxed">
-                هذا المساعد مصمم لتقديم معلومات عامة وإرشادية فقط. لا يمكن للذكاء الاصطناعي استبدال الفحص السريري الدقيق الذي يجريه الدكتور في العيادة. يرجى عدم الاعتماد على المساعد في تشخيص الحالات الطارئة أو صرف الأدوية.
-              </p>
-           </div>
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
-export default SmartAssistant;
-

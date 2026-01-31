@@ -15,8 +15,8 @@ export const DOCTOR_NAME = "أ.د. أشرف العزب";
 export const DOCTOR_SLOGAN = "التخصص الدقيق يختصر الطريق";
 export const TRUST_MESSAGE = "ثقتكم أغلى ما نسعى إليه";
 
-// الصورة التي أرسلتها سنعتمد عليها في الموقع
-export const DOCTOR_IMAGE_URL = "https://i.postimg.cc/8z0Nf90P/dr-ashraf.jpg"; 
+// تم تغيير المسار ليعتمد على ملفك الشخصي عند رفعه
+export const DOCTOR_IMAGE_URL = "./dr-ashraf.jpg"; 
 
 export const PHONE_CAIRO = "01027470066";
 export const PHONE_SENBELLAWEIN = "01212585052";

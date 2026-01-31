@@ -40,13 +40,24 @@ const Footer: React.FC = () => {
               <p className="text-white/60 text-[10px] font-bold italic">"{TRUST_MESSAGE}"</p>
             </div>
             
-            <div className="bg-white/5 p-6 rounded-[30px] border border-white/10 mb-8">
-              <p className="text-[10px] font-black uppercase tracking-widest text-medical-green mb-4">الدفع الإلكتروني عبر InstaPay</p>
-              <div className="flex items-center gap-4">
-                 <img src={INSTAPAY_QR_CODE} alt="InstaPay QR" className="w-20 h-20 rounded-xl bg-white p-1" />
-                 <div className="flex flex-col">
-                   <button onClick={handleInstaPay} className="text-xs font-black bg-medical-green text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform mb-2">نسخ العنوان</button>
-                   <span className="text-[9px] text-slate-400 font-bold">{INSTAPAY_INFO}</span>
+            {/* بطاقة InstaPay محسنة */}
+            <div className="bg-white/5 p-6 rounded-[30px] border border-white/10 mb-8 backdrop-blur-sm group hover:border-medical-green transition-all">
+              <div className="flex items-center gap-2 mb-4">
+                 <span className="text-lg">💰</span>
+                 <p className="text-[11px] font-black uppercase tracking-widest text-medical-green">ادفع أونلاين عبر InstaPay</p>
+              </div>
+              <div className="flex items-center gap-5">
+                 <div className="bg-white p-2 rounded-2xl shadow-xl transition-transform group-hover:scale-110">
+                    <img src={INSTAPAY_QR_CODE} alt="InstaPay QR" className="w-20 h-20" />
+                 </div>
+                 <div className="flex flex-col gap-2">
+                   <button 
+                     onClick={handleInstaPay} 
+                     className="text-[10px] font-black bg-medical-green text-white px-5 py-2.5 rounded-xl hover:bg-medical-darkGreen transition-all shadow-lg active:scale-95"
+                   >
+                     نسخ عنوان الدفع
+                   </button>
+                   <span className="text-[10px] text-slate-400 font-bold font-mono tracking-tight">{INSTAPAY_INFO}</span>
                  </div>
               </div>
             </div>

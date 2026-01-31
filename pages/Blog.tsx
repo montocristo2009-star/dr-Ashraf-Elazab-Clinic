@@ -56,8 +56,8 @@ const Blog: React.FC = () => {
           <div className="relative z-10 w-48 h-48 md:w-64 md:h-64 flex-shrink-0 group">
             <div className="absolute inset-0 bg-medical-green rounded-[40px] rotate-6 group-hover:rotate-0 transition-transform duration-500"></div>
             <img 
-              src={DOCTOR_IMAGE_URL} 
-              alt={DOCTOR_NAME} 
+              src={https://github.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/blob/39cab301a5abdbc236e4c918717e73ba8d1e188c/IMG_7772.jpeg} 
+              alt={دكتور أشرف العزب} 
               className="relative z-10 w-full h-full object-cover rounded-[40px] shadow-2xl border-4 border-white"
               onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
             />

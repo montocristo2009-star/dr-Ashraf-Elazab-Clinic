@@ -11,7 +11,6 @@ import Testimonials from './pages/Testimonials';
 import SmartAssistant from './pages/SmartAssistant';
 import SocialSidebar from './components/SocialSidebar';
 import AIChatWidget from './components/AIChatWidget';
-import BackgroundMusic from './components/BackgroundMusic';
 import MediaLab from './components/MediaLab';
 import LiveVoiceWidget from './components/LiveVoiceWidget';
 

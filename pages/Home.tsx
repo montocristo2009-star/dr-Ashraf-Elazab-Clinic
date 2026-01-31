@@ -40,17 +40,21 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-center animate-fade-in-up lg:justify-end">
-            <div className="doctor-image-frame w-full max-w-md aspect-square bg-slate-200 p-2 border-4 border-white overflow-hidden rounded-[40px] shadow-2xl relative flex items-center justify-center">
-              {!imgError ? (
-                <img 
-                  src={https://github.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/blob/5c7a4e111520e41218a05f93068b04e554bc89db/dr-ashraf.jpg.PNG} 
-                  alt={DOCTOR_NAME} 
-                  className="w-full h-full object-cover rounded-[32px] block relative z-10" 
-                  loading="eager"
-                  onError={() => setImgError(true)}
-                />
-              ) : (
+        <div className="relative flex justify-center animate-fade-in-up lg:justify-end">
+  <div className="doctor-image-frame w-full max-w-md aspect-square bg-slate-200 p-2 border-4 border-white overflow-hidden rounded-[40px] shadow-2xl relative flex items-center justify-center">
+    {!imgError ? (
+      <img 
+        src="https://raw.githubusercontent.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/5c7a4e111520e41218a05f93068b04e554bc89db/dr-ashraf.jpg.PNG"
+        alt="دكتور أشرف العزب"
+        className="w-full h-full object-cover rounded-[32px] block relative z-10"
+        loading="eager"
+        onError={() => setImgError(true)}
+      />
+    ) : (
+      <div className="text-gray-500">Image failed to load</div>
+    )}
+  </div>
+</div>
                 <div className="flex flex-col items-center justify-center bg-medical-blue w-full h-full rounded-[32px]">
                    <span className="text-9xl">👨‍⚕️</span>
                    <p className="text-white/50 text-xs font-bold mt-4">Professional Profile</p>

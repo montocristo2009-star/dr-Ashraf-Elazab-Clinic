@@ -95,5 +95,40 @@ const Booking: React.FC = () => {
     </div>
   );
 };
+{/* نموذج الحجز الموحد */}
+<div className="max-w-xl mx-auto mt-20 p-8 bg-white rounded-3xl shadow-xl border border-slate-100 text-right">
+  <h2 className="text-2xl font-black text-medical-blue mb-6">
+    احجز موعدك
+  </h2>
 
+  <form className="flex flex-col gap-4">
+    <input
+      type="text"
+      placeholder="الاسم بالكامل"
+      className="border p-3 rounded-xl"
+      required
+    />
+
+    <input
+      type="tel"
+      placeholder="رقم الموبايل"
+      className="border p-3 rounded-xl"
+      required
+    />
+
+    <select className="border p-3 rounded-xl" required>
+      <option value="">اختر الفرع</option>
+      <option value="nasr-city">فرع مدينة نصر</option>
+      <option value="october">فرع 6 أكتوبر</option>
+      <option value="maadi">فرع المعادي</option>
+    </select>
+
+    <button
+      type="submit"
+      className="bg-medical-blue text-white py-4 rounded-xl font-black text-lg hover:bg-medical-green transition"
+    >
+      تأكيد الحجز
+    </button>
+  </form>
+</div>
 export default Booking;

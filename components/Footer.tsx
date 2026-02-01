@@ -12,7 +12,9 @@ import {
   INSTAGRAM_URL,
   WHATSAPP_URL,
   INSTAPAY_INFO,
-  INSTAPAY_QR_CODE
+  INSTAPAY_QR_CODE,
+  CAIRO_MAP_URL,
+  MANSOURA_MAP_URL
 } from '../constants';
 
 const Footer: React.FC = () => {
@@ -79,11 +81,11 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-black mb-6 text-medical-green">الفروع</h3>
+            <h3 className="text-lg font-black mb-6 text-medical-green">الفروع والمواقع</h3>
             <ul className="space-y-4 text-sm font-bold text-slate-400">
-              <li>القاهرة: {PHONE_CAIRO}</li>
-              <li>المنصورة: {PHONE_MANSOURA}</li>
-              <li>السنبلاوين: {PHONE_SENBELLAWEIN}</li>
+              <li><a href={CAIRO_MAP_URL} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">📍 القاهرة: {PHONE_CAIRO}</a></li>
+              <li><a href={MANSOURA_MAP_URL} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">📍 المنصورة: {PHONE_MANSOURA}</a></li>
+              <li>📍 السنبلاوين: {PHONE_SENBELLAWEIN}</li>
             </ul>
           </div>
 

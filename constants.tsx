@@ -1,241 +1,121 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { BLOG_POSTS, DOCTOR_IMAGE_URL, DOCTOR_NAME, DOCTOR_SLOGAN } from '../constants';
-import { BlogPost } from '../types';
+import { Service, NavLink, BlogPost, Review } from './types';
 
-const POSTS_PER_PAGE = 6;
+export const NAV_LINKS: NavLink[] = [
+  { label: 'الرئيسية', path: '/' },
+  { label: 'عن الدكتور', path: '/about' },
+  { label: 'كواليس العمليات', path: '/gallery' },
+  { label: 'المساعد الذكي', path: '/ai-assistant' },
+  { label: 'التخصصات', path: '/services' },
+  { label: 'المدونة الطبية', path: '/blog' },
+  { label: 'شهادات المرضى', path: '/testimonials' },
+  { label: 'احجز الآن', path: '/booking' },
+];
 
-const Blog: React.FC = () => {
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('الكل');
-  const [currentPage, setCurrentPage] = useState(1);
+export const DOCTOR_NAME = "أ.د. أشرف العزب";
+export const DOCTOR_SLOGAN = "التخصص الدقيق يختصر الطريق";
+export const TRUST_MESSAGE = "ثقتكم أسمى ما نسعى إليه";
 
-  const categories = useMemo(() => {
-    const cats = BLOG_POSTS.map(post => post.category);
-    return ['الكل', ...Array.from(new Set(cats))];
-  }, []);
+// الرابط المباشر (Raw) للصورة من GitHub لضمان ظهورها في المتصفح
+export const DOCTOR_IMAGE_URL = "https://raw.githubusercontent.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/5b9e966a98332c58148d31bc48bf42edfff163c8/IMG_7772.jpeg"; 
 
-  const filteredPosts = useMemo(() => {
-    let result = BLOG_POSTS;
-    if (selectedCategory !== 'الكل') {
-      result = result.filter(post => post.category === selectedCategory);
-    }
-    const query = searchQuery.toLowerCase().trim();
-    if (query) {
-      result = result.filter((post) => {
-        return (
-          post.title.toLowerCase().includes(query) ||
-          post.category.toLowerCase().includes(query) ||
-          post.date.toLowerCase().includes(query) ||
-          post.summary.toLowerCase().includes(query)
-        );
-      });
-    }
-    return result;
-  }, [searchQuery, selectedCategory]);
+export const PHONE_CAIRO = "01027470066";
+export const PHONE_SENBELLAWEIN = "01212585052";
+export const PHONE_MANSOURA = "01277048240";
+export const CLINIC_PHONE = PHONE_CAIRO;
 
-  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
-  const paginatedPosts = useMemo(() => {
-    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-    return filteredPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
-  }, [filteredPosts, currentPage]);
+export const MANSOURA_MAP_IFRAME = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3419.1436412431683!2d31.378473!3d31.040925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f79db7a9053547%3A0xf8761703d273c56d!2z2YXYrNmF2Lkg2KfZhNmF2YbYtdmI2LHYqQ!5e0!3m2!1sar!2seg!4v1710000000000!5m2!1sar!2seg";
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedCategory]);
+export const FACEBOOK_URL = "https://facebook.com/drashrafelazab";
+export const INSTAGRAM_URL = "https://instagram.com/drashrafelazab";
+export const TIKTOK_URL = "https://tiktok.com/@drashrafelazab";
+export const YOUTUBE_URL = "https://youtube.com/@drashrafelazab";
+export const WHATSAPP_URL = "https://wa.me/201027470066";
 
-  return (
-    <div className="py-32 bg-slate-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 text-right">
-        
-        {/* Doctor Spotlight Header */}
-        <section className="mb-24 bg-white rounded-[60px] p-8 md:p-16 shadow-xl border border-slate-100 relative overflow-hidden flex flex-col lg:flex-row items-center gap-12 animate-fade-in-up">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-medical-green/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-          
-          <div className="relative z-10 w-48 h-48 md:w-64 md:h-64 flex-shrink-0 group">
-            <div className="absolute inset-0 bg-medical-green rounded-[40px] rotate-6 group-hover:rotate-0 transition-transform duration-500"></div>
-            <img 
-              src={DOCTOR_IMAGE_URL} 
-              alt={DOCTOR_NAME} 
-              className="relative z-10 w-full h-full object-cover rounded-[40px] shadow-2xl border-4 border-white"
-              onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
-            />
-          </div>
+export const INSTAPAY_INFO = "ashraf.elazab@instapay";
+export const INSTAPAY_QR_CODE = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=ashraf.elazab@instapay";
 
-          <div className="relative z-10 text-center lg:text-right flex-grow">
-            <span className="text-medical-green font-black text-xs uppercase tracking-[0.4em] mb-4 block">Author & Expert</span>
-            <h1 className="text-4xl md:text-5xl font-black text-medical-blue mb-4">المدونة الطبية للدكتور أشرف العزب</h1>
-            <p className="text-xl text-slate-500 font-bold mb-6 italic">{DOCTOR_SLOGAN}</p>
-            <p className="text-lg text-slate-400 max-w-2xl leading-relaxed font-medium">
-              مرحباً بكم في مساحتي التثقيفية. هنا أشارككم أحدث التطورات العالمية في جراحة العظام والمناظير، مع نصائح عملية للوقاية من الإصابات الرياضية والتعافي السليم. هدفنا دائماً هو "التخصص الدقيق الذي يختصر طريق العلاج".
-            </p>
-          </div>
-        </section>
+export const SURGERY_GALLERY = [
+  { url: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800", title: "داخل غرفة العمليات", category: "التجهيزات" },
+  { url: "https://images.unsplash.com/photo-1579154235820-22b6479f649c?auto=format&fit=crop&q=80&w=800", title: "أدوات الجراحة الدقيقة", category: "الأدوات" },
+  { url: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80&w=800", title: "فريق التمريض المساعد", category: "الفريق" },
+  { url: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800", title: "تجهيز مفصل الركبة", category: "العمليات" },
+  { url: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800", title: "جراحة المناظير الحديثة", category: "المناظير" }
+];
 
-        <div className="mb-16">
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto relative group mb-12">
-            <div className="absolute inset-y-0 right-6 flex items-center pointer-events-none text-slate-400 group-focus-within:text-medical-green transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input 
-              type="text"
-              placeholder="ابحث عن مقال طبي..."
-              className="w-full bg-white border-2 border-slate-100 rounded-[30px] py-5 pr-16 pl-8 text-lg font-bold text-medical-blue focus:border-medical-green focus:ring-0 outline-none transition-all shadow-sm hover:shadow-md"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
+export const ACADEMIC_CREDENTIALS = [
+  {
+    title: "الدكتوراة",
+    degree: "دكتوراة جراحة العظام والمناظير - جامعة القاهرة",
+    description: "أعلى درجة علمية وأكاديمية متخصصة في جراحة العظام من أعرق الجامعات المصرية.",
+    icon: "🎓",
+    type: "phd"
+  },
+  {
+    title: "البورد الأوروبي",
+    degree: "زميل المجلس الأوروبي لجراحة العظام والكسور (EBOT)",
+    description: "شهادة دولية تعكس الكفاءة الجراحية وفقاً للمعايير الأوروبية.",
+    icon: "🇪🇺",
+    type: "board"
+  }
+];
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-8 py-3 rounded-full font-black text-sm transition-all duration-300 border-2 ${
-                  selectedCategory === cat 
-                  ? 'bg-medical-blue text-white border-medical-blue shadow-lg scale-105' 
-                  : 'bg-white text-slate-400 border-slate-100 hover:border-medical-green hover:text-medical-green'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        {paginatedPosts.length > 0 ? (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {paginatedPosts.map((post) => (
-                <article key={post.id} className="bg-white rounded-[45px] shadow-sm border border-slate-100 overflow-hidden flex flex-col hover:shadow-2xl transition-all h-full group animate-fade-in-up">
-                  <div className="h-56 relative overflow-hidden bg-slate-200">
-                    <img 
-                      src={post.imageUrl || `https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800`} 
-                      alt={post.title} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-medical-blue/60 to-transparent"></div>
-                    <div className="absolute bottom-6 right-8">
-                       <div className="flex items-center gap-3 bg-white/95 backdrop-blur-sm p-2 pr-5 rounded-full shadow-lg">
-                          <img 
-                            src={DOCTOR_IMAGE_URL} 
-                            alt={DOCTOR_NAME} 
-                            className="w-9 h-9 rounded-full object-cover ring-2 ring-medical-green" 
-                            onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
-                          />
-                          <div className="flex flex-col">
-                             <span className="text-[10px] font-black text-medical-blue leading-none">{DOCTOR_NAME}</span>
-                             <span className="text-[7px] text-slate-500 font-bold uppercase">استشاري جراحة العظام</span>
-                          </div>
-                       </div>
-                    </div>
-                  </div>
-                  <div className="p-10 pt-10 flex flex-col h-full">
-                    <span className="text-[10px] font-black text-medical-green uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full w-fit mb-4">{post.category}</span>
-                    <h2 className="text-2xl font-black text-medical-blue mb-6 leading-tight group-hover:text-medical-green transition-colors">{post.title}</h2>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-10 line-clamp-3 font-medium">{post.summary}</p>
-                    <div className="mt-auto">
-                      <button 
-                        onClick={() => setSelectedPost(post)}
-                        className="bg-slate-50 text-medical-blue px-8 py-4 rounded-2xl font-black text-xs hover:bg-medical-blue hover:text-white transition-all w-full text-center border border-slate-100"
-                      >
-                        تفاصيل المقال
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+export const BLOG_POSTS: BlogPost[] = [
+  { id: '1', title: 'إعادة بناء الرباط الصليبي: لماذا الدقة التشريحية؟', summary: 'تعرف على الفرق بين الطريقة التقليدية وإعادة البناء التشريحي الحديث بالمنظار.', content: 'إعادة البناء التشريحي للرباط الصليبي تهدف إلى وضع الرقعة الجديدة في مكانها الطبيعي بدقة، مما يضمن ثبات الركبة ومنع تكرار الإصابة. نحن نستخدم أحدث التقنيات لضمان عودة الرياضي لمستواه السابق في أسرع وقت ممكن.', category: 'إصابات الملاعب', date: 'مارس 2024', icon: '⚽', imageUrl: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800' },
+  { id: '2', title: 'تغيير مفصل الركبة: متى يكون القرار صحيحاً؟', summary: 'علامات تدل على ضرورة استبدال المفصل لتحسين جودة الحياة والتخلص من الألم المزمن.', content: 'عندما تفشل كافة المحاولات التحفظية من علاج طبيعي وحقن، ويصبح الألم عائقاً عن ممارسة الحياة اليومية، يكون تغيير المفصل هو الحل الجذري لاستعادة القدرة على المشي بدون ألم.', category: 'المفاصل الصناعية', date: 'مارس 2024', icon: '🦾', imageUrl: 'https://images.unsplash.com/photo-1581595221445-97d833923293?auto=format&fit=crop&q=80&w=800' },
+  { id: '3', title: 'علاج خلع الكتف المتكرر بالمنظار', summary: 'تقنيات حديثة لترميم كبسولة الكتف ومنع تكرار الخلع لدى الرياضيين.', content: 'تعتبر جراحة بانكارت بالمنظار هي المعيار الذهبي لعلاج خلع الكتف المتكرر، حيث يتم تثبيت الأربطة الممزقة باستخدام خطاطيف دقيقة جداً تذوب مع الوقت وتترك المفصل ثابتاً وقوياً.', category: 'جراحة الكتف', date: 'فبراير 2024', icon: '💪', imageUrl: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800' },
+  { id: '4', title: 'خياطة الغضروف الهلالي مقابل الاستئصال', summary: 'لماذا نحرص دائماً على الحفاظ على الغضروف الهلالي وخياطته بدلاً من إزالته؟', content: 'الغضروف الهلالي يعمل كممتص للصدمات في الركبة. إزالته تؤدي حتماً لخشونة مبكرة، لذا نتبع في عيادتنا فلسفة "الحفاظ على الغضروف" عن طريق خياطته بتقنيات المنظار الحديثة.', category: 'مناظير المفاصل', date: 'فبراير 2024', icon: '🧶', imageUrl: 'https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?auto=format&fit=crop&q=80&w=800' },
+  { id: '5', title: 'ترميم الكسور المعقدة: أحدث البروتوكولات السويسرية', summary: 'تثبيت الكسور الصعبة باستخدام الشرائح ذاتية الغلق لضمان التئام سريع.', content: 'التعامل مع الكسور المعقدة يتطلب مهارة جراحية فائقة وفهم عميق لميكانيكا العظام. نحن نطبق أحدث معايير AO Trauma العالمية لضمان عودة الوظيفة الطبيعية للعضو المصاب.', category: 'إصابات الحوادث', date: 'يناير 2024', icon: '🇨🇭', imageUrl: 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800' },
+  { id: '6', title: 'حقن البلازما PRP: هل هي الحل السحري؟', summary: 'متى نلجأ للطب التجديدي وحقن البلازما في علاج التهاب الأوتار والخشونة؟', content: 'حقن البلازما الغنية بالصفائح الدموية تعتبر طفرة في علاج إصابات الأوتار والخشونة المبكرة، حيث تحفز الجسم على إصلاح الأنسجة التالفة بشكل طبيعي وبدون جراحة.', category: 'الطب التجديدي', date: 'يناير 2024', icon: '🩸', imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800' },
+  { id: '7', title: 'هشاشة العظام: القاتل الصامت في كبار السن', summary: 'كيف تحمي نفسك من كسور الحوض والفقرات الناتجة عن ضعف العظام؟', content: 'التشخيص المبكر عن طريق فحص ديكسا وتناول العلاج المناسب يقلل من مخاطر الكسور بنسبة كبيرة. الوقاية خير من العلاج خاصة في حالات الهشاشة المتقدمة.', category: 'أمراض العظام', date: 'ديسمبر 2023', icon: '🦴', imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800' },
+  { id: '8', title: 'تمزق أوتار الكتف: ألم يعطل حياتك', summary: 'دليل شامل للتعامل مع آلام الكتف الليلية وضعف الحركة.', content: 'تمزق الكفة المدورة (Rotator Cuff) يسبب آلاماً مبرحة خاصة في الليل. التدخل بالمنظار لإصلاح الوتر وإعادة تثبيته يعيد للكتف قوته وحريته في الحركة.', category: 'جراحة الكتف', date: 'ديسمبر 2023', icon: '🏃', imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800' },
+  { id: '9', title: 'الفلات فوت عند الأطفال: هل يحتاج لعملية؟', summary: 'متى نكتفي بالتمارين ومتى يكون التدخل الجراحي البسيط ضرورياً؟', content: 'معظم حالات القدم المسطحة عند الأطفال طبيعية وتختفي مع النمو، لكن بعض الحالات تحتاج لتدخل لتصحيح وضع العظام وضمان مشي سليم في المستقبل.', category: 'عظام الأطفال', date: 'نوفمبر 2023', icon: '👶', imageUrl: 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80&w=800' },
+  { id: '10', title: 'جراحة اليوم الواحد في المناظير', summary: 'عد إلى منزلك في نفس يوم الجراحة بفضل التقنيات الحديثة.', content: 'تطور التخدير وأدوات المنظار المجهرية جعل من الممكن إجراء جراحات الرباط الصليبي والغضاريف كجراحة يوم واحد، مما يقلل وقت التعافي ويحسن النتائج.', category: 'تكنولوجيا الطب', date: 'نوفمبر 2023', icon: '🏠', imageUrl: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800' }
+];
 
-            {/* Pagination Controls */}
-            {totalPages > 1 && (
-              <div className="mt-20 flex justify-center items-center gap-4">
-                <button 
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                  className="w-14 h-14 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center text-medical-blue disabled:opacity-30 disabled:cursor-not-allowed hover:border-medical-green transition-all"
-                >
-                  <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
-                </button>
-                <div className="flex gap-2">
-                  {[...Array(totalPages)].map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={`w-14 h-14 rounded-2xl font-black transition-all ${currentPage === i + 1 ? 'bg-medical-blue text-white shadow-lg scale-110' : 'bg-white text-slate-400 border-2 border-slate-100'}`}
-                    >
-                      {i + 1}
-                    </button>
-                  ))}
-                </div>
-                <button 
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                  className="w-14 h-14 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center text-medical-blue disabled:opacity-30 disabled:cursor-not-allowed hover:border-medical-green transition-all"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
-                </button>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="text-center py-24 bg-white rounded-[60px] border-2 border-dashed border-slate-100">
-             <div className="text-6xl mb-6 opacity-20">🔍</div>
-             <h3 className="text-2xl font-black text-medical-blue mb-2">لا توجد مقالات تطابق هذا البحث</h3>
-             <button onClick={() => {setSearchQuery(''); setSelectedCategory('الكل');}} className="mt-8 text-medical-green font-black underline">عرض جميع المقالات</button>
-          </div>
-        )}
+export const REVIEWS: Review[] = [
+  { id: '1', patientName: 'أحمد محمود', text: 'أجرت لي عملية الرباط الصليبي والحمد لله عدت لممارسة كرة القدم بعد 6 أشهر بالضبط. دكتور محترف جداً.', rating: 5, source: 'Google', date: '2024' },
+  { id: '2', patientName: 'منى السيد', text: 'عملية تغيير مفصل الركبة غيرت حياتي. كنت أعاني من ألم شديد والآن أمشي بدون مساعدة. شكراً يا دكتور.', rating: 5, source: 'Facebook', date: '2024' },
+  { id: '3', patientName: 'إبراهيم حسن', text: 'دقة في التشخيص وسعة صدر في الإجابة على كل استفساراتي. فرع التجمع الخامس ممتاز جداً.', rating: 5, source: 'Google', date: '2024' },
+  { id: '4', patientName: 'سارة جلال', text: 'عالجت ابني من كسر معقد في فرع المنصورة. النتيجة كانت مبهرة والأشعة سليمة تماماً. أنصح به بشدة.', rating: 5, source: 'Google', date: '2023' },
+  { id: '5', patientName: 'د. يحيى شاهين', text: 'كزميل مهنة، أشهد للأستاذ الدكتور أشرف بالدقة العلمية والمهارة الجراحية الفائقة في حالات الحوادث الصعبة.', rating: 5, source: 'Facebook', date: '2023' },
+  { id: '6', patientName: 'عمر يوسف', text: 'عملت جراحة خلع الكتف المتكرر بالمنظار، والآن كتفي ثابت تماماً وأمارس رياضة السباحة بكل قوة.', rating: 5, source: 'Google', date: '2023' },
+  { id: '7', patientName: 'فاطمة الزهراء', text: 'أفضل دكتور عظام قابلته، رحيم جداً بحالة المرضى وشرح لي خطوات عملية الحوض بكل بساطة.', rating: 5, source: 'Facebook', date: '2023' },
+  { id: '8', patientName: 'ياسين أحمد', text: 'حقن البلازما PRP أعطت نتائج مذهلة في التهاب الوتر الذي كنت أعاني منه لسنوات. شكراً للطاقم المساعد.', rating: 5, source: 'Instagram', date: '2023' },
+  { id: '9', patientName: 'علاء الدين', text: 'زرت فرع السنبلاوين، الكشف دقيق جداً والتشخيص كان صحيحاً من أول مرة بعد معاناة طويلة.', rating: 5, source: 'Google', date: '2022' },
+  { id: '10', patientName: 'نورا السيد', text: 'مستوى عيادة راقي جداً وتعامل احترافي. العملية نجحت بنسبة 100% وبدأت العلاج الطبيعي فوراً.', rating: 5, source: 'Facebook', date: '2022' }
+];
 
-        {/* Modal Overlay */}
-        {selectedPost && (
-          <div className="fixed inset-0 z-[3000] flex items-center justify-center p-6 bg-medical-blue/80 backdrop-blur-md">
-            <div className="bg-white w-full max-w-3xl rounded-[60px] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col relative animate-fade-in-up">
-              <button onClick={() => setSelectedPost(null)} className="absolute top-8 left-8 p-4 bg-white/80 backdrop-blur-sm rounded-full hover:bg-red-50 transition-all z-20 shadow-lg">
-                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"/></svg>
-              </button>
-              <div className="overflow-y-auto">
-                <div className="h-72 relative">
-                  <img src={selectedPost.imageUrl || `https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200`} alt={selectedPost.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
-                </div>
-                <div className="p-12 -mt-20 relative z-10">
-                  <span className="text-xs font-black text-medical-green uppercase tracking-widest bg-green-50 px-4 py-1 rounded-full">{selectedPost.category}</span>
-                  <h2 className="text-4xl font-black text-medical-blue mt-6 leading-tight">{selectedPost.title}</h2>
-                  
-                  <div className="flex items-center gap-4 mt-8 mb-12 bg-slate-50 p-4 rounded-3xl w-fit">
-                    <img 
-                      src={DOCTOR_IMAGE_URL} 
-                      alt={DOCTOR_NAME} 
-                      className="w-14 h-14 rounded-full object-cover border-2 border-medical-green" 
-                      onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
-                    />
-                    <div>
-                        <p className="text-sm font-black text-medical-blue">{DOCTOR_NAME}</p>
-                        <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">كاتب المقال • {selectedPost.date}</p>
-                    </div>
-                  </div>
+export const ACADEMIC_STATS = [
+  { label: "بحث دولي", value: "40+", icon: "🔬" },
+  { label: "استشهاد علمي", value: "300+", icon: "📚" },
+  { label: "خبرة", value: "20+", icon: "👨‍⚕️" }
+];
 
-                  <div className="prose prose-slate max-w-none">
-                    <div className="text-slate-700 text-xl leading-relaxed whitespace-pre-line font-medium border-r-4 border-medical-green pr-8">
-                      {selectedPost.content}
-                    </div>
-                  </div>
-                  
-                  <div className="mt-16 pt-10 border-t border-slate-100 flex justify-center">
-                    <button onClick={() => setSelectedPost(null)} className="bg-medical-blue text-white px-16 py-5 rounded-3xl font-black hover:bg-medical-green transition-all shadow-xl">إغلاق المقال</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+export const SURGICAL_SERVICES: Service[] = [
+  { id: 'joint', title: 'المفاصل الصناعية', description: 'استبدال الركبة والحوض بأحدث التقنيات السويسرية والألمانية.', icon: '🦾' },
+  { id: 'fracture', title: 'ترميم الكسور', description: 'تثبيت الكسور المعقدة وإصابات الحوادث بأحدث الشرائح.', icon: '🦴' },
+  { id: 'scope', title: 'المناظير', description: 'جراحات الرباط الصليبي والغضاريف للرياضيين وغير الرياضيين.', icon: '🏃‍♂️' }
+];
 
-export default Blog;
+export const RESEARCH_INFO = [
+  "أكثر من 40 بحثاً علمياً منشوراً في أكبر المجلات الدولية.",
+  "خبير تدريس جراحات استبدال المفاصل لشباب الأطباء.",
+  "محرر علمي دولي في تخصص جراحة العظام والكسور.",
+  "خبير أبحاث الطب التجديدي واستخدام الخلايا الجذعية والبلازما."
+];
+
+export const FELLOWSHIPS_DETAILED = [
+  { title: "زمالة جنيف - سويسرا", subtitle: "ترميم الكسور", icon: "🇨🇭", description: "تخصص دقيق في تثبيت الكسور المعقدة وإصابات الحوادث." },
+  { title: "زمالة هايدلبرج - ألمانيا", subtitle: "المفاصل الصناعية", icon: "🇩🇪", description: "خبرة متقدمة في استبدال مفاصل الركبة والحوض." },
+  { title: "زمالة سيول - كوريا", subtitle: "الأطراف الصناعية", icon: "🇰🇷", description: "تقنيات الأطراف المتقدمة والجراحات المجهرية." }
+];
+
+export const INTERNATIONAL_MEMBERSHIPS = [
+  { title: "SICOT Global", code: "عضوية", icon: "🌍" },
+  { title: "AO Trauma", code: "عضوية", icon: "🇨🇭" },
+  { title: "ISAKOS Member", code: "عضوية", icon: "⚽" },
+  { title: "AAOS Affiliate", code: "عضوية", icon: "🇺🇸" },
+  { title: "ESSKA Fellow", code: "عضوية", icon: "🇪🇺" },
+  { title: "EOA Active", code: "عضوية", icon: "🇪🇬" },
+  { title: "EGAA Member", code: "عضوية", icon: "🔬" }
+];

@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -41,7 +42,6 @@ const App: React.FC = () => {
           </Routes>
         </main>
 
-        {/* أدوات التواصل والذكاء الاصطناعي */}
         <SocialSidebar />
         <AIChatWidget />
         <MediaLab />

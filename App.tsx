@@ -8,7 +8,6 @@ import Booking from './pages/Booking';
 import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import SmartAssistant from './pages/SmartAssistant';
-import SurgicalGallery from './pages/SurgicalGallery';
 import SocialSidebar from './components/SocialSidebar';
 import AIChatWidget from './components/AIChatWidget';
 import MediaLab from './components/MediaLab';

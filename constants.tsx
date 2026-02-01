@@ -15,7 +15,7 @@ export const DOCTOR_NAME = "أ.د. أشرف العزب";
 export const DOCTOR_SLOGAN = "التخصص الدقيق يختصر الطريق";
 export const TRUST_MESSAGE = "ثقتكم أسمى ما نسعى إليه";
 
-// الرابط المباشر (Raw) للصورة من GitHub لضمان ظهورها في المتصفح
+// الرابط المباشر للصورة لضمان عملها في المتصفح
 export const DOCTOR_IMAGE_URL = "https://raw.githubusercontent.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/5b9e966a98332c58148d31bc48bf42edfff163c8/IMG_7772.jpeg"; 
 
 export const PHONE_CAIRO = "01027470066";

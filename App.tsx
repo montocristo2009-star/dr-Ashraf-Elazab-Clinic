@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -9,7 +8,7 @@ import Booking from './pages/Booking';
 import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import SmartAssistant from './pages/SmartAssistant';
-import Gallery from './pages/Gallery';
+import SurgicalGallery from './pages/SurgicalGallery';
 import SocialSidebar from './components/SocialSidebar';
 import AIChatWidget from './components/AIChatWidget';
 import MediaLab from './components/MediaLab';
@@ -33,7 +32,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery" element={<SurgicalGallery />} />
             <Route path="/ai-assistant" element={<SmartAssistant />} />
             <Route path="/services" element={<Home />} /> 
             <Route path="/blog" element={<Blog />} />     

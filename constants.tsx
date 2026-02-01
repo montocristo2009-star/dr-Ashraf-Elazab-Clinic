@@ -33,7 +33,18 @@ export const WHATSAPP_URL = "https://wa.me/201027470066";
 // Payment Info
 export const INSTAPAY_INFO = "ashraf.elazab@instapay";
 export const INSTAPAY_QR_CODE = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=ashraf.elazab@instapay";
-
+export const SURGERY_GALLERY = [
+  { url: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800", title: "داخل غرفة العمليات", category: "التجهيزات" },
+  { url: "https://images.unsplash.com/photo-1579154235820-22b6479f649c?auto=format&fit=crop&q=80&w=800", title: "أدوات الجراحة الدقيقة", category: "الأدوات" },
+  { url: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80&w=800", title: "فريق التمريض المساعد", category: "الفريق" },
+  { url: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800", title: "تجهيز مفصل الركبة", category: "العمليات" },
+  { url: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=800", title: "جراحة المناظير الحديثة", category: "المناظير" },
+  { url: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800", title: "التعقيم والأمان الطبي", category: "الأمان" },
+  { url: "https://images.unsplash.com/photo-1583912267550-d44d7a125e7e?auto=format&fit=crop&q=80&w=800", title: "أجهزة المراقبة الحيوية", category: "التجهيزات" },
+  { url: "https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?auto=format&fit=crop&q=80&w=800", title: "ترميم الكسور المعقدة", category: "العمليات" },
+  { url: "https://images.unsplash.com/photo-1581595221445-97d833923293?auto=format&fit=crop&q=80&w=800", title: "حقن البلازما PRP", category: "العلاجات" },
+  { url: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800", title: "جراحة الكتف المتقدمة", category: "العمليات" }
+  ];
 export const ACADEMIC_CREDENTIALS = [
   {
     title: "الدكتوراة",

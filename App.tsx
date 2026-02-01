@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -9,11 +8,10 @@ import Booking from './pages/Booking';
 import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import SmartAssistant from './pages/SmartAssistant';
+import Gallery from './pages/Gallery';
 import SocialSidebar from './components/SocialSidebar';
 import AIChatWidget from './components/AIChatWidget';
-import BackgroundMusic from './components/BackgroundMusic';
 import MediaLab from './components/MediaLab';
-import LiveVoiceWidget from './components/LiveVoiceWidget';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -34,6 +32,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/ai-assistant" element={<SmartAssistant />} />
             <Route path="/services" element={<Home />} /> 
             <Route path="/blog" element={<Blog />} />     
@@ -42,12 +41,10 @@ const App: React.FC = () => {
           </Routes>
         </main>
 
-        {/* أدوات الذكاء الاصطناعي والتواصل */}
+        {/* أدوات التواصل والذكاء الاصطناعي */}
         <SocialSidebar />
         <AIChatWidget />
-        <BackgroundMusic />
         <MediaLab />
-        <LiveVoiceWidget />
         
         <Footer />
       </div>

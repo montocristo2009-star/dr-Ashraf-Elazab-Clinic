@@ -41,7 +41,7 @@ export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false
     
     if (useSearch) tools.push({ googleSearch: {} });
     if (useMaps) {
-      modelName = 'gemini-2.5-flash-lite-latest';
+      modelName = 'gemini-flash-lite-latest';
       tools.push({ googleMaps: {} });
     }
 

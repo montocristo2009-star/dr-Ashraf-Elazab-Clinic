@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center gap-5 group">
               <div className="w-14 h-14 rounded-[20px] bg-medical-blue flex items-center justify-center text-white shadow-2xl group-hover:bg-medical-green transition-all transform group-hover:rotate-6 duration-500">
-                <span className="text-3xl">🩺</span>
+                <span className="text-3xl">🦴</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-black text-medical-blue leading-none tracking-tight">{DOCTOR_NAME}</span>
@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
         <div className="p-10 flex flex-col h-full">
           <div className="flex justify-between items-center mb-20">
              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-medical-blue rounded-xl flex items-center justify-center text-white text-2xl">🩺</div>
+                <div className="w-12 h-12 bg-medical-blue rounded-xl flex items-center justify-center text-white text-2xl">🦴</div>
                 <span className="text-xl font-black text-medical-blue">{DOCTOR_NAME}</span>
              </div>
              <button onClick={() => setIsOpen(false)} className="p-4 bg-slate-100 rounded-2xl text-medical-blue">

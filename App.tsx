@@ -9,11 +9,9 @@ import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import SmartAssistant from './pages/SmartAssistant';
 import Gallery from './pages/Gallery';
+import SurgicalGallery from './pages/SurgicalGallery';
 import SocialSidebar from './components/SocialSidebar';
 import AIChatWidget from './components/AIChatWidget';
-import MediaLab from './components/MediaLab';
-import LiveVoiceWidget from './components/LiveVoiceWidget';
-import BackgroundMusic from './components/BackgroundMusic';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -35,6 +33,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/surgical-gallery" element={<SurgicalGallery />} />
             <Route path="/ai-assistant" element={<SmartAssistant />} />
             <Route path="/services" element={<Home />} /> 
             <Route path="/blog" element={<Blog />} />     
@@ -45,9 +44,6 @@ const App: React.FC = () => {
 
         <SocialSidebar />
         <AIChatWidget />
-        <MediaLab />
-        <LiveVoiceWidget />
-        <BackgroundMusic />
         
         <Footer />
       </div>

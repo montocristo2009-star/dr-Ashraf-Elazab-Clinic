@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getMedicalAdvice, ChatMessage } from '../services/geminiService';
 import { DOCTOR_NAME } from '../constants';
 
@@ -43,10 +44,11 @@ const AIChatWidget: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 z-[1000] font-cairo" dir="rtl">
       <div className={`absolute bottom-20 right-0 w-[350px] md:w-[480px] max-h-[700px] bg-white rounded-[40px] shadow-2xl border border-slate-100 flex flex-col overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-90 opacity-0 pointer-events-none'}`}>
+        {/* Chat Header */}
         <div className="bg-medical-blue p-6 text-white flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-medical-green rounded-2xl flex items-center justify-center text-2xl shadow-lg relative">
-              <span>🤖</span>
+              <span>🦵</span>
               {isLoading && <span className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full border-4 border-medical-blue animate-ping"></span>}
             </div>
             <div>
@@ -59,6 +61,22 @@ const AIChatWidget: React.FC = () => {
           </button>
         </div>
 
+        {/* Quick Booking CTA Banner */}
+        <div className="px-6 py-4 bg-medical-green/5 border-b border-slate-100 flex justify-between items-center group">
+           <div className="flex items-center gap-3">
+              <span className="text-xl">🦴</span>
+              <p className="text-[11px] font-black text-medical-blue">هل تود تأكيد حجزك مباشرة؟</p>
+           </div>
+           <Link 
+              to="/booking" 
+              onClick={() => setIsOpen(false)} 
+              className="bg-medical-green text-white px-5 py-2 rounded-xl text-[10px] font-black hover:bg-medical-blue transition-all shadow-lg shadow-medical-green/20"
+           >
+              احجز الآن
+           </Link>
+        </div>
+
+        {/* Messages Container */}
         <div className="flex-grow overflow-y-auto p-6 space-y-6 bg-slate-50 min-h-[400px]">
           {messages.map((m, i) => (
             <div key={i} className={`flex ${m.role === 'user' ? 'justify-start' : 'justify-end'}`}>
@@ -91,6 +109,7 @@ const AIChatWidget: React.FC = () => {
           <div ref={messagesEndRef} />
         </div>
 
+        {/* Input Area */}
         <div className="p-5 bg-white border-t border-slate-100">
           <div className="flex gap-3">
             <input 
@@ -117,7 +136,7 @@ const AIChatWidget: React.FC = () => {
         <span className="text-3xl text-white">
           {isOpen ? (
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"/></svg>
-          ) : '🤖'}
+          ) : '🦵'}
         </span>
         {!isOpen && <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-4 border-white animate-pulse"></span>}
       </button>

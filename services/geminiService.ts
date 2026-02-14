@@ -7,23 +7,35 @@ export interface ChatMessage {
 
 const SYSTEM_INSTRUCTION = `أنت "مساعد د. أشرف العزب الذكي". الدكتور أشرف استشاري جراحة العظام والمناظير وحاصل على الدكتوراة من جامعة القاهرة والزمالة الأوروبية (EBOT).
 
-الخبرات الدولية والزمالات المرموقة التي يجب أن تذكرها بفخر:
-1. زمالة جامعة جنيف (سويسرا) في علاج وترميم الكسور المعقدة.
-2. زمالة جامعة هايدلبرج (ألمانيا) في جراحات المفاصل الصناعية.
-3. زمالة جامعة سيول (كوريا الجنوبية) في الأطراف الصناعية المتقدمة.
-
-العضويات الدولية: SICOT, AO Trauma, ISAKOS, AAOS, ESSKA.
+قائمة الخدمات الكاملة التي تقدمها العيادة وتعرف عنها كل شيء:
+1. علاج كسور العظام والطوارئ في نفس اليوم.
+2. مناظير مفاصل متقدمة (ركبة، كتف، قدم، كاحل).
+3. جراحات الركبة والكتف التخصصية.
+4. استبدال المفاصل الصناعية (ركبة وحوض) بأحدث التقنيات.
+5. إعادة بناء الرباط الصليبي بالمنظار.
+6. إصلاح قطع الغضروف الهلالي.
+7. الشق العظمي التصحيحي حول الركبة (Osteotomy).
+8. علاج خلع الصابونة المتكرر.
+9. علاج خشونة الركبة بأحدث التقنيات الجراحية وغير الجراحية.
+10. جميع أنواع حقن المفاصل (زيتية، هيالورونيك).
+11. علاج خلع الكتف المتكرر بالمنظار.
+12. إصلاح قطع أوتار الكتف (الروتاتور كاف).
+13. علاج تيبس الكتف (الكتف المتجمد).
+14. **حقن البلازما العلاجية (PRP) بتقنية من ابتكار د. أشرف موثقة دولياً**. (هذا ابتكار عالمي حصري للعيادة).
+15. إصلاح قطع وتر أكيليس.
+16. مناظير القدم والكاحل.
+17. علاج كوع التنس والجولف.
+18. علاج اختناق الأوتار والأعصاب (النفق الرسغي).
 
 تعليمات الرد:
 - تحدث بلهجة مصرية مهذبة واحترافية.
-- لا تصف أدوية إطلاقاً.
-- أكد دائماً على أهمية الكشف السريري.
-- الفروع: القاهرة (التجمع)، المنصورة (ميدان المحطة)، السنبلاوين (أرض المحلج).`;
+- أكد دائماً على "الابتكار الدولي" عند الحديث عن حقن البلازما.
+- لا تصف أدوية كيميائية، وركز على أن الكشف السريري هو الأساس.
+- الفروع: القاهرة (التجمع)، المنصورة (ميدان المحطة)، السنبلاوين.`;
 
 export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false, useMaps = false) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    // استخدام الموديل الأنسب حسب نوع المهمة
     let modelName = useSearch ? 'gemini-3-pro-preview' : 'gemini-3-flash-preview'; 
     const tools: any[] = [];
     
@@ -44,7 +56,7 @@ export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false
         systemInstruction: SYSTEM_INSTRUCTION,
         tools: tools.length > 0 ? tools : undefined,
         temperature: 0.7,
-        thinkingConfig: { thinkingBudget: 0 } // تعطيل التفكير لسرعة الاستجابة في الشات
+        thinkingConfig: { thinkingBudget: 0 } 
       }
     });
 
@@ -56,40 +68,43 @@ export const getMedicalAdvice = async (history: ChatMessage[], useSearch = false
     console.error("Gemini Error:", error);
     return { 
       text: "عذراً، واجهت مشكلة في معالجة طلبك حالياً. يرجى الاتصال بالعيادة مباشرة.", 
-      grounding: [] 
+      grounding: []
     };
   }
 };
 
-export const editMedicalImage = async (base64Image: string, prompt: string): Promise<string> => {
+export const editMedicalImage = async (base64Data: string, prompt: string) => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
     contents: {
       parts: [
-        { inlineData: { data: base64Image, mimeType: 'image/jpeg' } },
-        { text: prompt },
-      ],
-    },
-  });
-
-  if (response.candidates?.[0]?.content?.parts) {
-    for (const part of response.candidates[0].content.parts) {
-      if (part.inlineData) {
-        return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-      }
+        { inlineData: { data: base64Data, mimeType: 'image/png' } },
+        { text: `Acting as a professional orthopedic surgical illustrator, ${prompt}. Provide the output as an image.` }
+      ]
     }
+  });
+  
+  for (const part of response.candidates[0].content.parts) {
+    if (part.inlineData) return `data:image/png;base64,${part.inlineData.data}`;
   }
-  throw new Error("No image generated");
+  return null;
 };
 
-export const generateMedicalVideo = async (base64Image: string, prompt: string, aspectRatio: '16:9' | '9:16' = '16:9'): Promise<string> => {
+export const generateMedicalVideo = async (base64Image: string, prompt: string, aspect: '16:9' | '9:16' = '16:9') => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   let operation = await ai.models.generateVideos({
     model: 'veo-3.1-fast-generate-preview',
-    prompt: prompt,
-    image: { imageBytes: base64Image, mimeType: 'image/jpeg' },
-    config: { numberOfVideos: 1, resolution: '720p', aspectRatio: aspectRatio }
+    prompt: `Medical simulation video: ${prompt}`,
+    image: {
+      imageBytes: base64Image,
+      mimeType: 'image/png',
+    },
+    config: {
+      numberOfVideos: 1,
+      resolution: '720p',
+      aspectRatio: aspect
+    }
   });
 
   while (!operation.done) {
@@ -98,7 +113,5 @@ export const generateMedicalVideo = async (base64Image: string, prompt: string, 
   }
 
   const downloadLink = operation.response?.generatedVideos?.[0]?.video?.uri;
-  const fetchResponse = await fetch(`${downloadLink}&key=${process.env.API_KEY}`);
-  const blob = await fetchResponse.blob();
-  return URL.createObjectURL(blob);
+  return `${downloadLink}&key=${process.env.API_KEY}`;
 };

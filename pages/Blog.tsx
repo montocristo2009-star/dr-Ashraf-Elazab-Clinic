@@ -45,7 +45,7 @@ const Blog: React.FC = () => {
   }, [searchQuery, selectedCategory]);
 
   return (
-    <div className="py-32 bg-slate-50 min-h-screen">
+    <div className="py-32 bg-slate-50 min-h-screen font-cairo" dir="rtl">
       <div className="max-w-7xl mx-auto px-6 text-right">
         
         {/* Doctor Spotlight Header */}
@@ -53,7 +53,7 @@ const Blog: React.FC = () => {
           <div className="absolute top-0 left-0 w-64 h-64 bg-medical-green/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
           
           <div className="relative z-10 w-48 h-48 md:w-64 md:h-64 flex-shrink-0 group">
-            <div className="absolute inset-0 bg-medical-green rounded-[40px] rotate-6 group-hover:rotate-0 transition-transform duration-500"></div>
+            <div className="absolute inset-0 bg-medical-green rounded-[40px] rotate-6 group-hover:rotate-0 transition-transform duration-500 shadow-lg"></div>
             <img 
               src={DOCTOR_IMAGE_URL} 
               alt={DOCTOR_NAME} 
@@ -63,11 +63,11 @@ const Blog: React.FC = () => {
           </div>
 
           <div className="relative z-10 text-center lg:text-right flex-grow">
-            <span className="text-medical-green font-black text-xs uppercase tracking-[0.4em] mb-4 block">Author & Expert</span>
+            <span className="text-medical-green font-black text-xs uppercase tracking-[0.4em] mb-4 block">Author & Expert Content</span>
             <h1 className="text-4xl md:text-5xl font-black text-medical-blue mb-4">المدونة الطبية للدكتور أشرف العزب</h1>
             <p className="text-xl text-slate-500 font-bold mb-6 italic">{DOCTOR_SLOGAN}</p>
             <p className="text-lg text-slate-400 max-w-2xl leading-relaxed font-medium">
-              مرحباً بكم في مساحتي التثقيفية. هنا أشارككم أحدث التطورات العالمية في جراحة العظام والمناظير، مع نصائح عملية للوقاية من الإصابات الرياضية والتعافي السليم. هدفنا دائماً هو "التخصص الدقيق الذي يختصر طريق العلاج".
+              مرحباً بكم في مساحتي التثقيفية. هنا أشارككم أحدث التطورات العالمية في جراحة العظام والمناظير، مع نصائح عملية للوقاية والتعافي.
             </p>
           </div>
         </section>
@@ -82,8 +82,8 @@ const Blog: React.FC = () => {
             </div>
             <input 
               type="text"
-              placeholder="ابحث عن مقال طبي..."
-              className="w-full bg-white border-2 border-slate-100 rounded-[30px] py-5 pr-16 pl-8 text-lg font-bold text-medical-blue focus:border-medical-green focus:ring-0 outline-none transition-all shadow-sm hover:shadow-md"
+              placeholder="ابحث في المقالات..."
+              className="w-full bg-white border-2 border-slate-100 rounded-[30px] py-5 pr-16 pl-8 text-lg font-bold text-medical-blue focus:border-medical-green focus:ring-0 outline-none transition-all shadow-sm hover:shadow-md text-right"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -114,7 +114,7 @@ const Blog: React.FC = () => {
                 <article key={post.id} className="bg-white rounded-[45px] shadow-sm border border-slate-100 overflow-hidden flex flex-col hover:shadow-2xl transition-all h-full group animate-fade-in-up">
                   <div className="h-56 relative overflow-hidden bg-slate-200">
                     <img 
-                      src={post.imageUrl || `https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800`} 
+                      src={post.imageUrl || "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800"} 
                       alt={post.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                     />
@@ -199,21 +199,21 @@ const Blog: React.FC = () => {
               </button>
               <div className="overflow-y-auto">
                 <div className="h-72 relative">
-                  <img src={selectedPost.imageUrl || `https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200`} alt={selectedPost.title} className="w-full h-full object-cover" />
+                  <img src={selectedPost.imageUrl || "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200"} alt={selectedPost.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
                 </div>
-                <div className="p-12 -mt-20 relative z-10">
+                <div className="p-12 -mt-20 relative z-10 text-right">
                   <span className="text-xs font-black text-medical-green uppercase tracking-widest bg-green-50 px-4 py-1 rounded-full">{selectedPost.category}</span>
                   <h2 className="text-4xl font-black text-medical-blue mt-6 leading-tight">{selectedPost.title}</h2>
                   
-                  <div className="flex items-center gap-4 mt-8 mb-12 bg-slate-50 p-4 rounded-3xl w-fit">
+                  <div className="flex items-center gap-4 mt-8 mb-12 bg-slate-50 p-4 rounded-3xl w-fit mr-auto lg:mr-0">
                     <img 
                       src={DOCTOR_IMAGE_URL} 
                       alt={DOCTOR_NAME} 
                       className="w-14 h-14 rounded-full object-cover border-2 border-medical-green" 
                       onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
                     />
-                    <div>
+                    <div className="text-right">
                         <p className="text-sm font-black text-medical-blue">{DOCTOR_NAME}</p>
                         <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">كاتب المقال • {selectedPost.date}</p>
                     </div>

@@ -27,7 +27,7 @@ export default function About() {
               "{TRUST_MESSAGE}"
             </p>
             <p className="text-xl text-slate-600 font-bold mb-12 leading-relaxed max-w-xl">
-              استشاري جراحة العظام والمناظير بمستشفيات جامعة القاهرة. خبير دولي في جراحات استبدال المفاصل وتدريس الأطراف الصناعية المتقدمة.
+              رئيس قسم المناظير والمفاصل، خبير دولي في جراحات استبدال المفاصل والمناظير المتقدمة. نكرس خبرتنا الطبية لخدمتكم وتوفير حياة خالية من الألم.
             </p>
             
             <div className="grid grid-cols-3 gap-6">
@@ -55,7 +55,7 @@ export default function About() {
                 ) : (
                   <div className="flex flex-col items-center justify-center bg-medical-blue w-full h-full rounded-[50px]">
                      <span className="text-8xl">👨‍⚕️</span>
-                     <p className="text-white/30 text-xs mt-6">Consultant Orthopedic Surgeon</p>
+                     <p className="text-white/30 text-xs mt-6">Head of Arthroscopy & Arthroplasty</p>
                   </div>
                 )}
               </div>
@@ -63,7 +63,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* Memberships Section - NEW */}
+        {/* Memberships Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
             <span className="text-medical-green font-black text-xs uppercase tracking-[0.5em] mb-4 block">Professional Affiliations</span>
@@ -108,7 +108,7 @@ export default function About() {
         {/* Academic Credentials */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-medical-blue mb-4">الاعتمادات الأكاديمية</h2>
+            <h2 className="text-4xl font-black text-medical-blue mb-4">الاعتمادات المهنية</h2>
             <div className="w-20 h-1.5 bg-medical-green mx-auto rounded-full"></div>
           </div>
           <div className="space-y-8">

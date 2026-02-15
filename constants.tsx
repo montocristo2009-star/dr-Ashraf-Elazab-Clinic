@@ -19,7 +19,7 @@ export const TRUST_MESSAGE = "ثقتكم أسمى ما نسعى إليه";
 // الرابط الأساسي للملفات على GitHub لضمان الوصول للصور الحقيقية
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/main/";
 
-export const DOCTOR_IMAGE_URL = `${GITHUB_RAW_BASE}dr-ashraf.jpg`; 
+export const DOCTOR_IMAGE_URL = `${GITHUB_RAW_BASE}dr-ashraf.jpeg`; 
 
 export const PHONE_CAIRO = "01027470066";
 export const PHONE_SENBELLAWEIN = "01212585052";

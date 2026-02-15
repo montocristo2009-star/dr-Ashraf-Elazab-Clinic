@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   ACADEMIC_CREDENTIALS,
@@ -8,7 +7,7 @@ import {
   ACADEMIC_STATS,
   DOCTOR_NAME,
   TRUST_MESSAGE,
-  DOCTOR_IMAGE_URL 
+  DOCTOR_SECONDARY_IMAGE_URL 
 } from '../constants';
 
 const About: React.FC = () => {
@@ -49,7 +48,7 @@ const About: React.FC = () => {
               <div className="bg-white p-4 rounded-[60px] shadow-2xl relative z-10 border border-slate-50 aspect-[4/5] overflow-hidden flex items-center justify-center">
                 {!imgError ? (
                   <img 
-                    src={DOCTOR_IMAGE_URL} 
+                    src={DOCTOR_SECONDARY_IMAGE_URL} 
                     alt={DOCTOR_NAME} 
                     className="w-full h-full object-cover rounded-[50px] shadow-inner"
                     onError={() => setImgError(true)}

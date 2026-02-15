@@ -1,8 +1,7 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getMedicalAdvice, ChatMessage } from '../services/geminiService';
-import { DOCTOR_NAME } from '../constants';
+import { DOCTOR_NAME, DOCTOR_TERTIARY_IMAGE_URL } from '../constants';
 
 const AIChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,8 +46,13 @@ const AIChatWidget: React.FC = () => {
         {/* Chat Header */}
         <div className="bg-medical-blue p-6 text-white flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-medical-green rounded-2xl flex items-center justify-center text-2xl shadow-lg relative">
-              <span>🦵</span>
+            <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg relative overflow-hidden p-0.5 border-2 border-medical-green">
+              <img 
+                src={DOCTOR_TERTIARY_IMAGE_URL} 
+                alt="Assistant Avatar" 
+                className="w-full h-full object-cover rounded-xl"
+                onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
+              />
               {isLoading && <span className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full border-4 border-medical-blue animate-ping"></span>}
             </div>
             <div>
@@ -131,14 +135,21 @@ const AIChatWidget: React.FC = () => {
       </div>
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className={`w-16 h-16 rounded-[25px] flex items-center justify-center shadow-2xl transition-all group relative ${isOpen ? 'bg-red-500 rotate-90' : 'bg-medical-blue hover:bg-medical-green hover:scale-110'}`}
+        className={`w-16 h-16 rounded-[25px] flex items-center justify-center shadow-2xl transition-all group relative overflow-hidden ${isOpen ? 'bg-red-500 rotate-90' : 'bg-medical-blue hover:bg-medical-green hover:scale-110'}`}
       >
-        <span className="text-3xl text-white">
-          {isOpen ? (
+        {isOpen ? (
+          <span className="text-3xl text-white">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"/></svg>
-          ) : '🦵'}
-        </span>
-        {!isOpen && <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-4 border-white animate-pulse"></span>}
+          </span>
+        ) : (
+          <img 
+            src={DOCTOR_TERTIARY_IMAGE_URL} 
+            alt="AI Assistant" 
+            className="w-full h-full object-cover scale-150"
+            onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
+          />
+        )}
+        {!isOpen && <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-4 border-white animate-pulse z-20"></span>}
       </button>
     </div>
   );

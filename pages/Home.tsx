@@ -25,14 +25,19 @@ export default function Home() {
           <div className="animate-fade-in-up">
             <div className="flex items-center gap-3 mb-8">
                <div className="w-10 h-1 bg-medical-green rounded-full"></div>
-               <span className="text-medical-green font-black text-[11px] uppercase tracking-[0.4em]">Head of Arthroscopy & Arthroplasty</span>
+               <span className="text-medical-green font-black text-[11px] uppercase tracking-[0.4em]">Arthroplasty & Arthroscopy Specialist</span>
             </div>
             <h1 className="text-6xl md:text-8xl font-black text-medical-blue mb-8 leading-[1.1]">
               نُعيد لك <br/><span className="text-medical-green">حُرية الحركة</span> <br/>بابتكار عالمي
             </h1>
-            <p className="text-xl text-slate-500 font-bold mb-10 leading-relaxed max-w-xl">
-              {DOCTOR_NAME} - رئيس قسم المناظير والمفاصل - وزميل البورد الأوروبي. نطبق أحدث التقنيات الجراحية والبيولوجية الموثقة دولياً لاستعادة صحة مفاصلك.
-            </p>
+            <div className="space-y-4 mb-10">
+              <p className="text-2xl font-black text-medical-blue">
+                {DOCTOR_NAME} - رئيس قسم المناظير والمفاصل
+              </p>
+              <p className="text-xl text-slate-500 font-bold leading-relaxed max-w-xl">
+                دكتوراة جراحة العظام من جامعة القاهرة (قصر العيني) وزميل البورد الأوروبي. نطبق أحدث التقنيات الجراحية والبيولوجية الموثقة دولياً لاستعادة صحة مفاصلك.
+              </p>
+            </div>
             <div className="flex flex-wrap gap-6">
               <Link to="/booking" className="btn-primary text-white px-12 py-6 rounded-[30px] font-black text-xl transition-all hover:scale-105 shadow-2xl">
                 احجز موعدك الآن
@@ -56,13 +61,6 @@ export default function Home() {
                       <p className="mt-4 font-black">أ.د. أشرف العزب</p>
                    </div>
                  )}
-               </div>
-               <div className="absolute top-1/4 -right-12 bg-white p-6 rounded-[35px] shadow-2xl border border-slate-50 flex items-center gap-4 animate-bounce duration-[3000ms] z-20">
-                  <span className="text-3xl">🇪🇺</span>
-                  <div className="text-right">
-                    <p className="text-[9px] font-black text-medical-green uppercase tracking-widest">Board Certified</p>
-                    <p className="text-sm font-black text-medical-blue">زميل البورد الأوروبي</p>
-                  </div>
                </div>
             </div>
           </div>
@@ -144,7 +142,8 @@ export default function Home() {
               <div className="space-y-6">
                  {[
                    "رئيس قسم المناظير والمفاصل",
-                   "زميل المجلس الأوروبي لجراحة العظام والكسور (EBOT)",
+                   "دكتوراة جراحة العظام - جامعة القاهرة (قصر العيني)",
+                   "زميل البورد الأوروبي لجراحة العظام والكسور",
                    "مبتكر تقنيات حقن البلازما العلاجية الموثقة دولياً"
                  ].map((item, i) => (
                    <div key={i} className="flex items-center gap-4 text-white font-black text-lg">

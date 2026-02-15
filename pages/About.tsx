@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { 
   ACADEMIC_CREDENTIALS,
   FELLOWSHIPS_DETAILED,
+  INTERNATIONAL_MEMBERSHIPS,
   ACADEMIC_STATS,
   DOCTOR_NAME,
   TRUST_MESSAGE,
@@ -59,6 +60,28 @@ export default function About() {
                 )}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Memberships Section - NEW */}
+        <section className="mb-32">
+          <div className="text-center mb-16">
+            <span className="text-medical-green font-black text-xs uppercase tracking-[0.5em] mb-4 block">Professional Affiliations</span>
+            <h2 className="text-4xl font-black text-medical-blue mb-4">عضويات الجمعيات الدولية والمحلية</h2>
+            <div className="w-20 h-1.5 bg-medical-green mx-auto rounded-full"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {INTERNATIONAL_MEMBERSHIPS.map((membership, i) => (
+              <div key={i} className="bg-slate-50 p-8 rounded-[40px] border border-slate-100 hover:bg-white hover:shadow-xl transition-all group flex items-center gap-6">
+                <div className={`w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 transition-transform ${membership.color}`}>
+                  {membership.icon}
+                </div>
+                <div className="text-right">
+                  <h4 className="text-xl font-black text-medical-blue mb-1">{membership.title}</h4>
+                  <p className="text-xs text-slate-500 font-bold">{membership.subtitle}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 

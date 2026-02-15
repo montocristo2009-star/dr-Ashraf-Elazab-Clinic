@@ -21,6 +21,7 @@ const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/montocristo2009-star/
 
 export const DOCTOR_IMAGE_URL = GITHUB_RAW_BASE + "IMG_7772.jpeg"; 
 export const DOCTOR_SECONDARY_IMAGE_URL = GITHUB_RAW_BASE + "dr-ashraf%20(2).jpeg";
+export const DOCTOR_TERTIARY_IMAGE_URL = GITHUB_RAW_BASE + "dr-ashraf%20(1).jpeg";
 
 export const PHONE_CAIRO = "01027470066";
 export const PHONE_SENBELLAWEIN = "01212585052";

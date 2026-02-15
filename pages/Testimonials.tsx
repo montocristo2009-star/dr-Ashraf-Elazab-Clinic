@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { REVIEWS, DOCTOR_NAME } from '../constants';
+import { REVIEWS, DOCTOR_NAME, DOCTOR_TERTIARY_IMAGE_URL } from '../constants';
 import { Link } from 'react-router-dom';
 
 const TestimonialCard: React.FC<{ review: any }> = ({ review }) => (
@@ -37,8 +36,17 @@ const Testimonials: React.FC = () => {
     <div className="min-h-screen bg-slate-50 pt-32 pb-40 font-cairo" dir="rtl">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Header Section */}
-        <div className="text-center mb-24 animate-fade-in-up">
+        {/* Header Section with Tertiary Image */}
+        <div className="text-center mb-24 animate-fade-in-up flex flex-col items-center">
+          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-10 group">
+             <div className="absolute inset-0 bg-medical-green rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+             <img 
+               src={DOCTOR_TERTIARY_IMAGE_URL} 
+               alt={DOCTOR_NAME} 
+               className="relative z-10 w-full h-full object-cover rounded-full border-4 border-white shadow-2xl"
+               onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"; }}
+             />
+          </div>
           <span className="text-medical-green font-black text-xs uppercase tracking-[0.5em] mb-6 block">Patient Feedback</span>
           <h1 className="text-5xl md:text-7xl font-black text-medical-blue mb-8 leading-tight">
             ماذا يقول <br/><span className="text-medical-green">مرضانا؟</span>

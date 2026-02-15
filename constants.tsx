@@ -19,7 +19,7 @@ export const TRUST_MESSAGE = "ثقتكم أسمى ما نسعى إليه";
 // الرابط الأساسي للملفات على GitHub لضمان الوصول للصور الحقيقية
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/main/";
 
-export const DOCTOR_IMAGE_URL = `${GITHUB_RAW_BASE}IMG_7772.jpeg`; 
+export const DOCTOR_IMAGE_URL = `${GITHUB_RAW_BASE}doctor image.png`; 
 
 export const PHONE_CAIRO = "01027470066";
 export const PHONE_SENBELLAWEIN = "01212585052";
@@ -47,7 +47,7 @@ export const SURGERY_GALLERY = [
   // كواليس العمليات (باستخدام المسار المباشر)
   { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM.jpeg`, title: "دقة العمل الجراحي في استبدال الركبة", category: "كواليس العمليات" },
   { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(1).jpeg`, title: "فريق العمل والأجهزة الحديثة", category: "كواليس العمليات" },
-  { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(2).jpeg`, title: "إجراء عملية منظار دقيقة", category: "كواليس العمليات" },
+  { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(2).jpeg`, title: "إجراء عملية تغيير مفصل ركبة دقيقة", category: "كواليس العمليات" },
   { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(3).jpeg`, title: "أعلى معايير التعقيم والأمان", category: "كواليس العمليات" },
 
   // البوسترات الطبية (باستخدام المسار المباشر)

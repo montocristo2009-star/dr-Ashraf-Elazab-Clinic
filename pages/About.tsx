@@ -26,9 +26,11 @@ export default function About() {
             <p className="text-xl text-medical-green font-black mb-8 italic">
               "{TRUST_MESSAGE}"
             </p>
-            <p className="text-xl text-slate-600 font-bold mb-12 leading-relaxed max-w-xl">
-              رئيس قسم المناظير والمفاصل، خبير دولي في جراحات استبدال المفاصل والمناظير المتقدمة. نكرس خبرتنا الطبية لخدمتكم وتوفير حياة خالية من الألم.
-            </p>
+            <div className="space-y-6 text-xl text-slate-600 font-bold mb-12 leading-relaxed max-w-xl">
+              <p>رئيس قسم المناظير والمفاصل، خبير دولي في جراحات استبدال المفاصل والمناظير المتقدمة.</p>
+              <p className="text-medical-blue">حاصل على درجة دكتوراة جراحة العظام من جامعة القاهرة (قصر العيني) وزميل البورد الأوروبي لجراحة العظام والكسور.</p>
+              <p>نكرس خبرتنا الطبية والأكاديمية لتوفير حياة أفضل وخالية من الألم لمرضانا، مع التركيز على التقنيات البيولوجية والمناظير الدقيقة.</p>
+            </div>
             
             <div className="grid grid-cols-3 gap-6">
                {ACADEMIC_STATS.map((stat, i) => (

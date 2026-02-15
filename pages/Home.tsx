@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -26,13 +25,13 @@ export default function Home() {
           <div className="animate-fade-in-up">
             <div className="flex items-center gap-3 mb-8">
                <div className="w-10 h-1 bg-medical-green rounded-full"></div>
-               <span className="text-medical-green font-black text-[11px] uppercase tracking-[0.4em]">International Orthopedic Expert</span>
+               <span className="text-medical-green font-black text-[11px] uppercase tracking-[0.4em]">Head of Arthroscopy & Arthroplasty</span>
             </div>
             <h1 className="text-6xl md:text-8xl font-black text-medical-blue mb-8 leading-[1.1]">
               نُعيد لك <br/><span className="text-medical-green">حُرية الحركة</span> <br/>بابتكار عالمي
             </h1>
             <p className="text-xl text-slate-500 font-bold mb-10 leading-relaxed max-w-xl">
-              {DOCTOR_NAME} - استشاري جراحة العظام والمناظير - دكتوراة جامعة القاهرة وزميل البورد الأوروبي. نطبق أحدث التقنيات الجراحية والبيولوجية الموثقة دولياً.
+              {DOCTOR_NAME} - رئيس قسم المناظير والمفاصل - وزميل البورد الأوروبي. نطبق أحدث التقنيات الجراحية والبيولوجية الموثقة دولياً لاستعادة صحة مفاصلك.
             </p>
             <div className="flex flex-wrap gap-6">
               <Link to="/booking" className="btn-primary text-white px-12 py-6 rounded-[30px] font-black text-xl transition-all hover:scale-105 shadow-2xl">
@@ -81,7 +80,7 @@ export default function Home() {
             {[
               { title: 'دقة تشخيصية', desc: 'استخدام أحدث تقنيات التصوير والمناظير للوصول لسبب المشكلة بدقة.', icon: '🎯' },
               { title: 'ابتكار دولي حصري', desc: 'حقن البلازما PRP بتقنيتنا الخاصة الموثقة دولياً لنتائج شفاء فائقة.', icon: '🧪' },
-              { title: 'خبرة أكاديمية', desc: 'أستاذ واستشاري بجامعة القاهرة بخبرة تتجاوز الـ 20 عاماً.', icon: '🎓' },
+              { title: 'قيادة طبية', desc: 'رئيس قسم المناظير والمفاصل بخبرة عملية وأكاديمية تتجاوز الـ 20 عاماً.', icon: '🏢' },
               { title: 'رعاية شاملة', desc: 'متابعة دقيقة بعد العمليات وتصميم برامج تأهيل مخصصة.', icon: '❤️' }
             ].map((item, i) => (
               <div key={i} className={`p-10 rounded-[50px] shadow-sm hover:shadow-2xl transition-all text-center group border ${i === 1 ? 'bg-medical-blue text-white border-medical-green scale-105' : 'bg-white border-slate-100'}`}>
@@ -144,7 +143,7 @@ export default function Home() {
               </p>
               <div className="space-y-6">
                  {[
-                   "دكتوراة جراحة العظام والمناظير - جامعة القاهرة",
+                   "رئيس قسم المناظير والمفاصل",
                    "زميل المجلس الأوروبي لجراحة العظام والكسور (EBOT)",
                    "مبتكر تقنيات حقن البلازما العلاجية الموثقة دولياً"
                  ].map((item, i) => (

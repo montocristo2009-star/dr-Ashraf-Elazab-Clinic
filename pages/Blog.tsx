@@ -7,9 +7,10 @@ const Blog: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('الكل');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = useMemo(() => {
-    const cats = ['الكل', ...new Set(BLOG_POSTS.map(post => post.category))];
-    return cats;
+  // Explicitly type the categories as string[] to ensure 'cat' is correctly inferred as a string
+  const categories = useMemo<string[]>(() => {
+    const uniqueCats = Array.from(new Set(BLOG_POSTS.map(post => post.category)));
+    return ['الكل', ...uniqueCats];
   }, []);
 
   const filteredPosts = useMemo(() => {
@@ -59,7 +60,8 @@ const Blog: React.FC = () => {
 
         {/* Categories Bar */}
         <div className="flex flex-wrap gap-4 mb-16 justify-center lg:justify-start">
-           {categories.map(cat => (
+           {/* Add explicit string typing to cat to resolve unknown type errors */}
+           {categories.map((cat: string) => (
              <button 
                 key={cat}
                 onClick={() => setActiveCategory(cat)}

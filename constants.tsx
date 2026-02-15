@@ -19,7 +19,8 @@ export const TRUST_MESSAGE = "ثقتكم أسمى ما نسعى إليه";
 // الرابط الأساسي للملفات على GitHub لضمان الوصول للصور الحقيقية
 const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/montocristo2009-star/dr-Ashraf-Elazab-Clinic/main/";
 
-export const DOCTOR_IMAGE_URL = `${GITHUB_RAW_BASE}dr-ashraf (3).jpeg; 
+export const DOCTOR_IMAGE_URL = GITHUB_RAW_BASE + "IMG_7772.jpeg"; 
+export const DOCTOR_SECONDARY_IMAGE_URL = GITHUB_RAW_BASE + "dr-ashraf%20(2).jpeg";
 
 export const PHONE_CAIRO = "01027470066";
 export const PHONE_SENBELLAWEIN = "01212585052";
@@ -33,7 +34,7 @@ export const MANSOURA_MAP_URL = "https://share.google/7gmOKPzhBsHbfqCpo";
 export const CAIRO_MAP_URL = "https://maps.app.goo.gl/qXyZ8p8q";
 
 export const WHATSAPP_NUMBER = "201027470066";
-export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
+export const WHATSAPP_URL = "https://wa.me/" + WHATSAPP_NUMBER;
 
 export const FACEBOOK_URL = "https://www.facebook.com/ElazabClinic/";
 export const INSTAGRAM_URL = "https://www.instagram.com/dr.ashrafelazab";
@@ -44,36 +45,36 @@ export const INSTAPAY_INFO = "ashraf.elazab@instapay";
 export const INSTAPAY_QR_CODE = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=ashraf.elazab@instapay";
 
 export const SURGERY_GALLERY = [
-  // كواليس العمليات (باستخدام المسار المباشر)
-  { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM.jpeg`, title: "دقة العمل الجراحي في استبدال الركبة", category: "كواليس العمليات" },
-  { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(1).jpeg`, title: "فريق العمل والأجهزة الحديثة", category: "كواليس العمليات" },
-  { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(2).jpeg`, title: "إجراء عملية تغيير مفصل ركبة دقيقة", category: "كواليس العمليات" },
-  { url: `${GITHUB_RAW_BASE}WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(3).jpeg`, title: "أعلى معايير التعقيم والأمان", category: "كواليس العمليات" },
+  // كواليس العمليات
+  { url: GITHUB_RAW_BASE + "WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM.jpeg", title: "دقة العمل الجراحي في استبدال الركبة", category: "كواليس العمليات" },
+  { url: GITHUB_RAW_BASE + "WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(1).jpeg", title: "فريق العمل والأجهزة الحديثة", category: "كواليس العمليات" },
+  { url: GITHUB_RAW_BASE + "WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(2).jpeg", title: "إجراء عملية منظار دقيقة", category: "كواليس العمليات" },
+  { url: GITHUB_RAW_BASE + "WhatsApp%20Image%202026-02-14%20at%208.54.10%20PM%20(3).jpeg", title: "أعلى معايير التعقيم والأمان", category: "كواليس العمليات" },
 
-  // البوسترات الطبية (باستخدام المسار المباشر)
-  { url: `${GITHUB_RAW_BASE}482355336_1070325641774781_8821094084108447029_n.jpg`, title: "الرباط الصليبي وإصابات الملاعب", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}590884066_1312528834221126_2027137057564373423_n.jpg`, title: "خشونة الركبة: الأسباب والحلول", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}611114090_1307303841410292_5688998711909729036_n.jpg`, title: "المفاصل الصناعية الحديثة", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}612253054_1309760474497962_1230606617808276829_n%20(1).jpg`, title: "استبدال مفصل الحوض الكلي", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}612194621_1309134684560541_2149829343123169423_n.jpg`, title: "خلع الكتف المتكرر بالمنظار", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}612441698_1309029464571063_4444525559942010931_n.jpg`, title: "تمزق أوتار الكتف وعلاجها", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}612475610_1309404254533584_8081388383168219963_n.jpg`, title: "متلازمة النفق الرسغي وتنميل اليد", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}613088323_1310588347748508_3340144969342158313_n.jpg`, title: "الشوكة العظمية وألم الكعب", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}613228355_1311234384350571_3614355803294695348_n.jpg`, title: "القدم المسطحة للأطفال", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}613646038_1313149707492372_8958945734881375980_n.jpg`, title: "الوقاية من هشاشة العظام", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}614021782_1310530987754244_4966135261350326720_n.jpg`, title: "الانزلاق الغضروفي القطني", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}614960058_1312692230871453_2926799032040542686_n.jpg`, title: "الانزلاق الغضروفي العنقي", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}615411131_1312689400871736_2728165012501895505_n.jpg`, title: "تقنيات التردد الحراري للآلام", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}615437480_1313107004163309_6293025025526272848_n.jpg`, title: "حقن البلازما الغنية بالصفائح", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}615493890_1314112770729399_7603888475343452517_n.jpg`, title: "إصابات الملاعب المتقدمة", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}615821371_1314810537326289_9020492027417499923_n.jpg`, title: "كسور عنق عظمة الفخذ", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616096873_1315037320636944_938587210235213310_n.jpg`, title: "النخر اللاوعائي لمفصل الحوض", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616134446_1314244797382863_6636562440177563014_n.jpg`, title: "الشق العظمي التصحيحي للركبة", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616196256_1314111957396147_2271737369499864201_n.jpg`, title: "جراحات اليوم الواحد بالمناظير", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616374826_1314235340717142_5063861676551507198_n.jpg`, title: "التعافي بعد جراحة المفاصل", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616448949_1314245807382762_1835065490289209926_n.jpg`, title: "التمارين المنزلية لآلام الظهر", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616559101_1315037147303628_9745948960733299_n.jpg`, title: "أورام العظام الحميدة", category: "بوسترات طبية" },
-  { url: `${GITHUB_RAW_BASE}616806918_1315036843970325_7996115481904456604_n.jpg`, title: "جراحات اليد المجهرية", category: "بوسترات طبية" }
+  // البوسترات الطبية
+  { url: GITHUB_RAW_BASE + "482355336_1070325641774781_8821094084108447029_n.jpg", title: "الرباط الصليبي وإصابات الملاعب", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "590884066_1312528834221126_2027137057564373423_n.jpg", title: "خشونة الركبة: الأسباب والحلول", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "611114090_1307303841410292_5688998711909729036_n.jpg", title: "المفاصل الصناعية الحديثة", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "612253054_1309760474497962_1230606617808276829_n%20(1).jpg", title: "استبدال مفصل الحوض الكلي", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "612194621_1309134684560541_2149829343123169423_n.jpg", title: "خلع الكتف المتكرر بالمنظار", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "612441698_1309029464571063_4444525559942010931_n.jpg", title: "تمزق أوتار الكتف وعلاجها", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "612475610_1309404254533584_8081388383168219963_n.jpg", title: "متلازمة النفق الرسغي وتنميل اليد", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "613088323_1310588347748508_3340144969342158313_n.jpg", title: "الشوكة العظمية وألم الكعب", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "613228355_1311234384350571_3614355803294695348_n.jpg", title: "القدم المسطحة للأطفال", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "613646038_1313149707492372_8958945734881375980_n.jpg", title: "الوقاية من هشاشة العظام", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "614021782_1310530987754244_4966135261350326720_n.jpg", title: "الانزلاق الغضروفي القطني", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "614960058_1312692230871453_2926799032040542686_n.jpg", title: "الانزلاق الغضروفي العنقي", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "615411131_1312689400871736_2728165012501895505_n.jpg", title: "تقنيات التردد الحراري للآلام", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "615437480_1313107004163309_6293025025526272848_n.jpg", title: "حقن البلازما الغنية بالصفائح", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "615493890_1314112770729399_7603888475343452517_n.jpg", title: "إصابات الملاعب المتقدمة", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "615821371_1314810537326289_9020492027417499923_n.jpg", title: "كسور عنق عظمة الفخذ", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616096873_1315037320636944_938587210235213310_n.jpg", title: "النخر اللاوعائي لمفصل الحوض", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616134446_1314244797382863_6636562440177563014_n.jpg", title: "الشق العظمي التصحيحي للركبة", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616196256_1314111957396147_2271737369499864201_n.jpg", title: "جراحات اليوم الواحد بالمناظير", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616374826_1314235340717142_5063861676551507198_n.jpg", title: "التعافي بعد جراحة المفاصل", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616448949_1314245807382762_1835065490289209926_n.jpg", title: "التمارين المنزلية لآلام الظهر", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616559101_1315037147303628_9745948960733299_n.jpg", title: "أورام العظام الحميدة", category: "بوسترات طبية" },
+  { url: GITHUB_RAW_BASE + "616806918_1315036843970325_7996115481904456604_n.jpg", title: "جراحات اليد المجهرية", category: "بوسترات طبية" }
 ];
 
 export const SURGICAL_SERVICES: Service[] = [

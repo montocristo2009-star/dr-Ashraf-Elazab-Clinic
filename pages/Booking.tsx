@@ -26,15 +26,18 @@ const Booking: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ترميز الرسالة بشكل كامل مع %0A بدل السطر الجديد
-    const message =
-      `مرحباً دكتور أشرف,%0A` +
-      `الاسم: ${encodeURIComponent(name)}%0A` +
-      `رقم الهاتف: ${encodeURIComponent(phone)}%0A` +
-      `العيادة: ${encodeURIComponent(getBranchName())}%0A` +
-      `سبب الزيارة أو الشكوى: ${encodeURIComponent(service)}`;
+    // ترميز كل البيانات بالكامل
+    const encodedName = encodeURIComponent(name);
+    const encodedPhone = encodeURIComponent(phone);
+    const encodedBranch = encodeURIComponent(getBranchName());
+    const encodedService = encodeURIComponent(service);
+
+    // بناء رسالة واتساب مع %0A للسطر الجديد
+    const message = `مرحباً دكتور أشرف,%0Aالاسم: ${encodedName}%0Aرقم الهاتف: ${encodedPhone}%0Aالعيادة: ${encodedBranch}%0Aسبب الزيارة أو الشكوى: ${encodedService}`;
 
     const whatsappURL = `https://wa.me/${getBranchPhone()}?text=${message}`;
+
+    // فتح الرابط في نافذة جديدة
     window.open(whatsappURL, '_blank');
 
     setSubmitted(true);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PHONE_CAIRO, PHONE_MANSOURA, PHONE_SENBELLAWEIN } from '../constants';
 
 const Booking: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -7,37 +8,30 @@ const Booking: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [service, setService] = useState('');
 
-  // رقم واتساب لكل فرع
   const getBranchPhone = () => {
-    if (selectedBranch === 'mansoura') return '01277048240';
-    if (selectedBranch === 'sinbellawein') return '01027470066';
-    if (selectedBranch === 'online') return '01277048240';
-    return '01027470066'; // القاهرة
+    if (selectedBranch === 'mansoura') return PHONE_MANSOURA;
+    if (selectedBranch === 'sinbellawein') return PHONE_SENBELLAWEIN;
+    return PHONE_CAIRO;
   };
 
-  // اسم الفرع للرسالة
   const getBranchName = () => {
     if (selectedBranch === 'mansoura') return 'المنصورة';
     if (selectedBranch === 'sinbellawein') return 'السنبلاوين';
-    if (selectedBranch === 'online') return 'كشف أونلاين (Zoom/Meet)';
     return 'القاهرة';
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ترميز كل البيانات بالكامل
-    const encodedName = encodeURIComponent(name);
-    const encodedPhone = encodeURIComponent(phone);
-    const encodedBranch = encodeURIComponent(getBranchName());
-    const encodedService = encodeURIComponent(service);
+    const message = encodeURIComponent(
+      `مرحباً دكتور أشرف،\n` +
+      `الاسم: ${name}\n` +
+      `رقم الهاتف: ${phone}\n` +
+      `العيادة: ${getBranchName()}\n` +
+      `سبب الزيارة أو الشكوى: ${service}`
+    );
 
-    // بناء رسالة واتساب مع %0A للسطر الجديد
-    const message = `مرحباً دكتور أشرف,%0Aالاسم: ${encodedName}%0Aرقم الهاتف: ${encodedPhone}%0Aالعيادة: ${encodedBranch}%0Aسبب الزيارة أو الشكوى: ${encodedService}`;
-
-    const whatsappURL = `https://wa.me/${getBranchPhone()}?text=${message}`;
-
-    // فتح الرابط في نافذة جديدة
+    const whatsappURL = `https://wa.me/201027470066?text=${message}`;
     window.open(whatsappURL, '_blank');
 
     setSubmitted(true);
@@ -51,15 +45,8 @@ const Booking: React.FC = () => {
             <div className="text-center py-16 animate-fade-in">
               <div className="text-8xl mb-10">✅</div>
               <h2 className="text-3xl font-black text-medical-blue mb-6">تم إرسال طلب الحجز بنجاح!</h2>
-              <p className="text-gray-600 text-xl font-medium mb-10">
-                سيتم التواصل معك عبر واتساب لتأكيد موعدك.
-              </p>
-              <button
-                onClick={() => setSubmitted(false)}
-                className="bg-medical-blue text-white px-10 py-4 rounded-2xl font-bold"
-              >
-                العودة للنموذج
-              </button>
+              <p className="text-gray-600 text-xl font-medium mb-10">سيتم التواصل معك عبر واتساب لتأكيد موعدك.</p>
+              <button onClick={() => setSubmitted(false)} className="bg-medical-blue text-white px-10 py-4 rounded-2xl font-bold">العودة للنموذج</button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-10">
@@ -104,7 +91,6 @@ const Booking: React.FC = () => {
                     <option value="cairo">فرع القاهرة (التجمع الخامس)</option>
                     <option value="mansoura">فرع المنصورة</option>
                     <option value="sinbellawein">فرع السنبلاوين</option>
-                    <option value="online">حجز كشف أونلاين (Zoom/Meet)</option>
                   </select>
                 </div>
 
@@ -119,12 +105,7 @@ const Booking: React.FC = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-medical-blue text-white py-6 rounded-2xl font-black text-2xl shadow-2xl hover:bg-medical-lightBlue transition-all transform hover:scale-[1.01] active:scale-95"
-              >
-                إرسال طلب الحجز
-              </button>
+              <button type="submit" className="w-full bg-medical-blue text-white py-6 rounded-2xl font-black text-2xl shadow-2xl hover:bg-medical-lightBlue transition-all transform hover:scale-[1.01] active:scale-95">إرسال طلب الحجز</button>
             </form>
           )}
         </div>

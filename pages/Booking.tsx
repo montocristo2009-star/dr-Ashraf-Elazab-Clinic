@@ -5,12 +5,9 @@ import { PHONE_CAIRO, PHONE_MANSOURA, PHONE_SENBELLAWEIN } from '../constants';
 const Booking: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState('cairo');
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    window.scrollTo(0, 0);
-  };
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [service, setService] = useState('');
 
   const getBranchPhone = () => {
     if (selectedBranch === 'mansoura') return PHONE_MANSOURA;
@@ -24,6 +21,23 @@ const Booking: React.FC = () => {
     return 'القاهرة';
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const message = encodeURIComponent(
+      `مرحباً دكتور أشرف،\n` +
+      `الاسم: ${name}\n` +
+      `رقم الهاتف: ${phone}\n` +
+      `العيادة: ${getBranchName()}\n` +
+      `سبب الزيارة أو الشكوى: ${service}`
+    );
+
+    const whatsappURL = `https://wa.me/201027470066?text=${message}`;
+    window.open(whatsappURL, '_blank');
+
+    setSubmitted(true);
+  };
+
   return (
     <div className="py-24 bg-gray-50 min-h-screen">
       <div className="max-w-3xl mx-auto px-4 pt-10 md:pt-20">
@@ -31,14 +45,8 @@ const Booking: React.FC = () => {
           {submitted ? (
             <div className="text-center py-16 animate-fade-in">
               <div className="text-8xl mb-10">✅</div>
-              <h2 className="text-3xl font-black text-medical-blue mb-6">تم استلام طلب الحجز بنجاح!</h2>
-              <p className="text-gray-600 text-xl font-medium mb-10">سيقوم فريق د. أشرف بالتواصل معك خلال ساعات لتأكيد الموعد النهائي.</p>
-              
-              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 mb-10">
-                 <p className="text-sm text-slate-400 font-black mb-2 uppercase tracking-widest">يمكنك الاتصال مباشرة لتسريع العملية لفرع {getBranchName()}</p>
-                 <p className="text-3xl font-black text-medical-blue tracking-widest">{getBranchPhone()}</p>
-              </div>
-
+              <h2 className="text-3xl font-black text-medical-blue mb-6">تم إرسال طلب الحجز بنجاح!</h2>
+              <p className="text-gray-600 text-xl font-medium mb-10">سيتم التواصل معك عبر واتساب لتأكيد موعدك.</p>
               <button onClick={() => setSubmitted(false)} className="bg-medical-blue text-white px-10 py-4 rounded-2xl font-bold">العودة للنموذج</button>
             </div>
           ) : (
@@ -47,23 +55,36 @@ const Booking: React.FC = () => {
                 <h1 className="text-4xl font-black text-medical-blue">حجز موعد كشف</h1>
                 <p className="text-gray-500 font-medium">يرجى ملء البيانات التالية بدقة لضمان سرعة التواصل.</p>
               </div>
-              
+
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-black text-gray-700 mr-2">الاسم بالكامل</label>
-                    <input required placeholder="اكتب اسمك هنا" className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold" />
+                    <input
+                      required
+                      placeholder="اكتب اسمك هنا"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold"
+                    />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-black text-gray-700 mr-2">رقم الموبايل</label>
-                    <input required type="tel" placeholder="01xxxxxxxxx" className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold" />
+                    <input
+                      required
+                      type="tel"
+                      placeholder="01xxxxxxxxx"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold"
+                    />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-black text-gray-700 mr-2">اختر فرع العيادة</label>
-                  <select 
-                    required 
+                  <select
+                    required
                     value={selectedBranch}
                     onChange={(e) => setSelectedBranch(e.target.value)}
                     className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold"
@@ -76,18 +97,16 @@ const Booking: React.FC = () => {
 
                 <div className="space-y-2">
                   <label className="text-sm font-black text-gray-700 mr-2">سبب الزيارة أو الشكوى</label>
-                  <textarea placeholder="يرجى كتابة نبذة مختصرة عن الحالة..." className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold h-40 resize-none"></textarea>
+                  <textarea
+                    placeholder="يرجى كتابة نبذة مختصرة عن الحالة..."
+                    value={service}
+                    onChange={(e) => setService(e.target.value)}
+                    className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-4 focus:ring-medical-lightBlue/30 text-lg font-bold h-40 resize-none"
+                  />
                 </div>
               </div>
 
-              <div className="bg-medical-green/5 p-6 rounded-3xl border border-medical-green/10 flex items-center justify-between">
-                <span className="text-medical-darkGreen font-black text-sm">رقم فرع {getBranchName()}:</span>
-                <span className="text-medical-blue font-black text-xl tracking-tighter">{getBranchPhone()}</span>
-              </div>
-
               <button type="submit" className="w-full bg-medical-blue text-white py-6 rounded-2xl font-black text-2xl shadow-2xl hover:bg-medical-lightBlue transition-all transform hover:scale-[1.01] active:scale-95">إرسال طلب الحجز</button>
-              
-              <p className="text-center text-xs text-gray-400 font-bold">بإرسالك لهذا النموذج، فأنت توافق على سياسة الخصوصية الخاصة بالعيادة.</p>
             </form>
           )}
         </div>

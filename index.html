@@ -109,5 +109,37 @@
   <body class="overflow-x-hidden antialiased">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
+    <!-- WhatsApp Booking Form -->
+<div style="max-width:400px;margin:30px auto;padding:20px;border:1px solid #ddd;border-radius:10px;">
+  <h3>احجز موعدك الآن</h3>
+  <form id="whatsappForm">
+    <label>الاسم:</label><br>
+    <input type="text" id="name" required style="width:100%;padding:8px;margin:5px 0;"><br>
+    
+    <label>رقم الهاتف:</label><br>
+    <input type="text" id="phone" required style="width:100%;padding:8px;margin:5px 0;"><br>
+    
+    <label>الخدمة المطلوبة:</label><br>
+    <input type="text" id="service" required style="width:100%;padding:8px;margin:5px 0;"><br>
+    
+    <button type="submit" style="background-color:#25D366;color:white;padding:10px 20px;border:none;border-radius:5px;margin-top:10px;font-weight:bold;">أرسل عبر واتساب</button>
+  </form>
+</div>
+
+<script>
+document.getElementById("whatsappForm").addEventListener("submit", function(e){
+    e.preventDefault(); // منع إعادة تحميل الصفحة
+
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var service = document.getElementById("service").value;
+
+    var message = `مرحباً دكتور أشرف،%0Aالاسم: ${name}%0Aرقم الهاتف: ${phone}%0Aالخدمة المطلوبة: ${service}`;
+
+    var whatsappURL = `https://wa.me/201027470066?text=${message}`;
+
+    window.open(whatsappURL, "_blank"); // يفتح واتساب مباشرة
+});
+</script>
   </body>
 </html>

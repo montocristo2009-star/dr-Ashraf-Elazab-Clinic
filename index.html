@@ -109,42 +109,125 @@
   <body class="overflow-x-hidden antialiased">
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
-<!-- WhatsApp Booking Form -->
-<div style="max-width:400px;margin:30px auto;padding:20px;border:1px solid #ddd;border-radius:10px;">
-  <h3>احجز موعدك الآن</h3>
-  <form id="whatsappForm">
-    <label>الاسم:</label><br>
-    <input type="text" id="name" required style="width:100%;padding:8px;margin:5px 0;"><br>
-    
-    <label>رقم الهاتف:</label><br>
-    <input type="text" id="phone" required style="width:100%;padding:8px;margin:5px 0;"><br>
-    
-    <label>الخدمة المطلوبة:</label><br>
-    <input type="text" id="service" required style="width:100%;padding:8px;margin:5px 0;"><br>
-    
-    <button type="submit" style="background-color:#25D366;color:white;padding:10px 20px;border:none;border-radius:5px;margin-top:10px;font-weight:bold;">أرسل عبر واتساب</button>
-  </form>
+<!-- WhatsApp Booking Popup Button -->
+<style>
+/* زر عائم */
+#whatsappBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 9999;
+}
+
+/* نافذة البوب اب */
+#whatsappPopup {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    width: 350px;
+    max-width: 90%;
+    padding: 20px;
+    z-index: 9999;
+}
+
+/* زر إغلاق */
+#closePopup {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-right: -10px;
+}
+
+/* inputs */
+#whatsappPopup input, #whatsappPopup select, #whatsappPopup button {
+    width: 100%;
+    margin: 5px 0 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#whatsappPopup button {
+    background-color: #25D366;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+</style>
+
+<!-- زر الحجز العائم -->
+<div id="whatsappBtn">💬 احجز عبر واتساب</div>
+
+<!-- نافذة البوب اب -->
+<div id="whatsappPopup">
+    <div id="closePopup">✖</div>
+    <h3 style="text-align:center;">احجز موعدك الآن</h3>
+    <form id="whatsappForm">
+        <input type="text" id="name" placeholder="الاسم" required>
+        <input type="text" id="phone" placeholder="رقم الهاتف" required>
+        <select id="clinic" required>
+            <option value="" disabled selected>اختر العيادة</option>
+            <option value="المنصورة">المنصورة</option>
+            <option value="السنبلاوين">السنبلاوين</option>
+            <option value="القاهرة">القاهرة</option>
+        </select>
+        <input type="text" id="service" placeholder="الخدمة المطلوبة" required>
+        <button type="submit">أرسل عبر واتساب</button>
+    </form>
 </div>
 
 <script>
+// فتح واغلاق البوب اب
+document.getElementById("whatsappBtn").onclick = function() {
+    document.getElementById("whatsappPopup").style.display = "block";
+}
+document.getElementById("closePopup").onclick = function() {
+    document.getElementById("whatsappPopup").style.display = "none";
+}
+
+// إرسال البيانات لواتساب
 document.getElementById("whatsappForm").addEventListener("submit", function(e){
-    e.preventDefault(); // منع إعادة تحميل الصفحة
+    e.preventDefault();
 
     var name = document.getElementById("name").value.trim();
     var phone = document.getElementById("phone").value.trim();
+    var clinic = document.getElementById("clinic").value;
     var service = document.getElementById("service").value.trim();
 
-    // إنشاء الرسالة مع ترميز صحيح للأحرف
     var message = encodeURIComponent(
         `مرحباً دكتور أشرف،\n` +
         `الاسم: ${name}\n` +
         `رقم الهاتف: ${phone}\n` +
+        `العيادة: ${clinic}\n` +
         `الخدمة المطلوبة: ${service}`
     );
 
     var whatsappURL = `https://wa.me/201027470066?text=${message}`;
 
-    window.open(whatsappURL, "_blank"); // يفتح واتساب مباشرة
+    window.open(whatsappURL, "_blank");
+
+    // إغلاق البوب اب بعد الإرسال
+    document.getElementById("whatsappPopup").style.display = "none";
+
+    // مسح النموذج
+    document.getElementById("whatsappForm").reset();
 });
 </script>
   </body>

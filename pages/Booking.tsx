@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 const Booking: React.FC = () => {
@@ -8,6 +7,7 @@ const Booking: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [service, setService] = useState('');
 
+  // رقم واتساب لكل فرع
   const getBranchPhone = () => {
     if (selectedBranch === 'mansoura') return '01277048240';
     if (selectedBranch === 'sinbellawein') return '01027470066';
@@ -15,6 +15,7 @@ const Booking: React.FC = () => {
     return '01027470066'; // القاهرة
   };
 
+  // اسم الفرع للرسالة
   const getBranchName = () => {
     if (selectedBranch === 'mansoura') return 'المنصورة';
     if (selectedBranch === 'sinbellawein') return 'السنبلاوين';
@@ -25,13 +26,13 @@ const Booking: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const message = encodeURIComponent(
-      `مرحباً دكتور أشرف،\n` +
-      `الاسم: ${name}\n` +
-      `رقم الهاتف: ${phone}\n` +
-      `العيادة: ${getBranchName()}\n` +
-      `سبب الزيارة أو الشكوى: ${service}`
-    );
+    // ترميز الرسالة بشكل كامل مع %0A بدل السطر الجديد
+    const message =
+      `مرحباً دكتور أشرف,%0A` +
+      `الاسم: ${encodeURIComponent(name)}%0A` +
+      `رقم الهاتف: ${encodeURIComponent(phone)}%0A` +
+      `العيادة: ${encodeURIComponent(getBranchName())}%0A` +
+      `سبب الزيارة أو الشكوى: ${encodeURIComponent(service)}`;
 
     const whatsappURL = `https://wa.me/${getBranchPhone()}?text=${message}`;
     window.open(whatsappURL, '_blank');
